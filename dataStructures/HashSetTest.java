@@ -19,10 +19,12 @@ public class HashSetTest {
 		names.add("Romeo");
 		names.remove("Romeo");
 		names.remove("George");
+		names.contains(names);
+		names.contains("Romeo");
 		Iterator<?> iter = names.iterator();
 		while (iter.hasNext()) {
 			System.out.println(iter.next());
 		}
-
+		System.out.println(names.getOutprint());
 	}
 }
