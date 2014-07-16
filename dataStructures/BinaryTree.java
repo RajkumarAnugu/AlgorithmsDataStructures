@@ -19,10 +19,10 @@ public class BinaryTree {
 		public Node left;
 		public Node right;
 		
-		private Node getLeft(){
+		public Node getLeft(){
 			return left;
 		}
-		private Node getRight(){
+		public Node getRight(){
 			return right;
 		}
 		public Object getData(){
