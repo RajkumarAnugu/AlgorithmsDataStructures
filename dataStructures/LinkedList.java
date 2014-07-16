@@ -1,6 +1,6 @@
 package dataStructures;
 
-import java.util.ListIterator;
+// import java.util.ListIterator;
 import java.util.NoSuchElementException;
 
 /**
@@ -70,11 +70,11 @@ public class LinkedList {
 	 * first and the private Node class.
 	 * 
 	 */
-	public ListIterator<?> listiterator() {
+	public ListIterator listIterator() {
 		return new LinkedListIterator();
 	}
 
-	class LinkedListIterator implements ListIterator<Object> {
+	class LinkedListIterator implements ListIterator {
 
 		private Node position;
 		private Node previous;
@@ -119,29 +119,29 @@ public class LinkedList {
 			return position.data;
 		}
 
-		@Override
-		public boolean hasPrevious() {
-			// TODO Auto-generated method stub
-			return false;
-		}
-
-		@Override
-		public Object previous() {
-			// TODO Auto-generated method stub
-			return null;
-		}
-
-		@Override
-		public int nextIndex() {
-			// TODO Auto-generated method stub
-			return 0;
-		}
-
-		@Override
-		public int previousIndex() {
-			// TODO Auto-generated method stub
-			return 0;
-		}
+		//		@Override
+		//		public boolean hasPrevious() {
+		//			// TODO Auto-generated method stub
+		//			return false;
+		//		}
+		//
+		//		@Override
+		//		public Object previous() {
+		//			// TODO Auto-generated method stub
+		//			return null;
+		//		}
+		//
+		//		@Override
+		//		public int nextIndex() {
+		//			// TODO Auto-generated method stub
+		//			return 0;
+		//		}
+		//
+		//		@Override
+		//		public int previousIndex() {
+		//			// TODO Auto-generated method stub
+		//			return 0;
+		//		}
 
 		@Override
 		public void remove() {
