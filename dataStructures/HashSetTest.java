@@ -17,10 +17,11 @@ public class HashSetTest {
 		names.add("Katherine");
 		names.add("Juliet");
 		names.add("Romeo");
+		System.out.println("names.contains(Romeo): " + names.contains("Romeo"));
 		names.remove("Romeo");
 		names.remove("George");
-		names.contains(names);
-		names.contains("Romeo");
+		System.out.println(names.contains(names));
+		System.out.println("names.contains(Romeo): " + names.contains("Romeo"));
 		Iterator<?> iter = names.iterator();
 		while (iter.hasNext()) {
 			System.out.println(iter.next());
