@@ -1,0 +1,14 @@
+package dataStructures;
+
+public class LinkedListStackTest {
+	public static void main(String[] args) {
+		LinkedListStack s = new LinkedListStack();
+		s.push("Tom");
+		s.push("Diana");
+		System.out.println("peek: " + s.peek());
+		s.push("Harry");
+		while (!s.empty()) {
+			System.out.println(s.pop());
+		}
+	}
+}

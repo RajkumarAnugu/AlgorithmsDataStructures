@@ -26,6 +26,20 @@ public class HuffmanTest {
 		System.out.println(encoded);
 		String decoded = tree.decode(encoded);
 		System.out.println(decoded);
+		System.out.println();
+
+		String encoded2 = encode("A", encodingMap);
+		System.out.println(encoded2);
+		String decoded2 = tree.decode(encoded2);
+		System.out.println(decoded2);
+
+		System.out.println();
+
+		String encoded3 = encode("P", encodingMap);
+		System.out.println(encoded3);
+		String decoded3 = tree.decode(encoded3);
+		System.out.println(decoded3);
+
 	}
 
 	public static String encode(String toEncode,
@@ -33,7 +47,7 @@ public class HuffmanTest {
 		String result = "";
 		for (int i = 0; i < toEncode.length(); i++) {
 			char ch = toEncode.charAt(i);
-			result = result + encodingMap.get(ch);
+			result = result + encodingMap.get(ch);// get the value of the key
 			System.out.println(encodingMap.get(ch));
 		}
 		return result;
