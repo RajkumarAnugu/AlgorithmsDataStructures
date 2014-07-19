@@ -6,7 +6,7 @@ import java.util.NoSuchElementException;
 public class HashSet {
 	private Node[] buckets;
 	private int currentSize;
-	private String outprint="";
+	private String outprint = "";
 
 	/**
 	 * Constructs a hash table.
@@ -16,24 +16,24 @@ public class HashSet {
 	public HashSet(int bucketsLength) {
 		buckets = new Node[bucketsLength];
 		currentSize = 0;
-		outprint+="create HashSet object\n";
+		outprint += "create HashSet object\n";
 	}
 
 	public boolean contains(Object x) {
-		outprint+="boolean contains Object x\n";
-		int h = x.hashCode();
-		outprint+="    x.hashCode: "+h+"\n";
+		outprint += "boolean contains Object x\n";
+		int h = x.hashCode();// hashCode method consistently return the same integer
+		outprint += "    x.hashCode: " + h + "\n";
 		if (h < 0) {
 			h = -h;
 		}
 		h = h % buckets.length;
-		outprint+="    x.hashCode%buckets.length: "+h+"\n";
+		outprint += "    x.hashCode%buckets.length: " + h + "\n";
 		Node current = buckets[h];
 		while (current != null) {
 			if (current.data.equals(x)) {
 				return true;
 			}
-			current = current.next;
+			current = current.next; // to (Node) Node.next
 		}
 		return false;
 	}
@@ -41,11 +41,13 @@ public class HashSet {
 	/**
 	 * Adds an element to this set.
 	 * 
+	 * A hash table uses the hash code to determine where to store each element.
+	 * 
 	 * @param x
 	 * @return true x is a new object, false x was already in the set
 	 */
 	public boolean add(Object x) {
-		outprint+="boolean add Object x\n";
+		outprint += "boolean add Object x\n";
 		int h = x.hashCode();
 		if (h < 0) {
 			h = -h;
@@ -74,7 +76,7 @@ public class HashSet {
 	 * @return true x was removed; false x was not an element of this set
 	 */
 	public boolean remove(Object x) {
-		outprint+="boolean remove Object x\n";
+		outprint += "boolean remove Object x\n";
 		int h = x.hashCode();
 		if (h < 0) {
 			h = -h;
@@ -100,7 +102,7 @@ public class HashSet {
 	}
 
 	public Iterator<?> iterator() {
-		outprint+="iterator()\n";
+		outprint += "iterator()\n";
 		return new HashSetIterator();
 	}
 
@@ -115,9 +117,10 @@ public class HashSet {
 	}
 
 	class HashSetIterator implements Iterator<Object> {
-		
+
 		private int bucketIndex;
 		private Node current;
+
 		//outprint+="HashSetIterator implements Iterator\n";
 		public HashSetIterator() {
 			current = null;
@@ -135,7 +138,7 @@ public class HashSet {
 			}
 			return false;
 		}
-		
+
 		@Override
 		public Object next() {
 			if (current != null && current.next != null) {
@@ -151,14 +154,14 @@ public class HashSet {
 			}
 			return current.data;
 		}
-		
+
 		@Override
 		public void remove() {
 			throw new UnsupportedOperationException();
 		}
 	}
-	
-	public String getOutprint(){
+
+	public String getOutprint() {
 		return outprint;
 	}
 }
