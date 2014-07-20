@@ -18,23 +18,28 @@ public class BinaryTree {
 		public Object data;
 		public Node left;
 		public Node right;
-		
-		public Node getLeft(){
+
+		public Node getLeft() {
 			return left;
 		}
-		public Node getRight(){
+
+		public Node getRight() {
 			return right;
 		}
-		public Object getData(){
+
+		public Object getData() {
 			return data;
 		}
 	}
-	public Node getLeft(){
+
+	public Node getLeft() {
 		return root.getLeft();
 	}
-	public Node getRight(){
+
+	public Node getRight() {
 		return root.getRight();
 	}
+
 	private static int height(Node n) {
 		if (n == null) {
 			return 0;
@@ -42,10 +47,12 @@ public class BinaryTree {
 			return 1 + Math.max(height(n.left), height(n.right));
 		}
 	}
-	public int height(){
+
+	public int height() {
 		return height(root);
 	}
-	public Object getData(){
+
+	public Object getData() {
 		return (String) root.getData();
 	}
 }

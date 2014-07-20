@@ -8,5 +8,7 @@ package dataStructures;
  *         define an interface type to make visitation more generic.
  */
 public interface Visitor {
+	void init();
+
 	void visit(Object data);
 }

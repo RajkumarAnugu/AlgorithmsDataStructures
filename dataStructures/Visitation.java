@@ -1,7 +1,6 @@
 package dataStructures;
 
 public class Visitation extends Tree {
-	//private Node root;
 
 	public Visitation(Object rootData) {
 		super(rootData);
@@ -18,7 +17,23 @@ public class Visitation extends Tree {
 	}
 
 	public void preorder(Visitor v) {
+		v.init();
 		preorder(root, v);
+	}
+
+	private static void postorder(Node n, Visitor v) {
+		if (n == null) {
+			return;
+		}
+		for (Node c : n.children) {
+			postorder(c, v);
+		}
+		v.visit(n.data);
+	}
+
+	public void postorder(Visitor v) {
+		v.init();
+		postorder(root, v);
 	}
 
 	public static void main(String[] args) {
@@ -36,7 +51,7 @@ public class Visitation extends Tree {
 		t2.addSubtree(to);
 		t2.addSubtree(new Visitation("Kari"));
 
-		t3.addSubtree(tt);
+		t3.addSubtree(new Visitation("Jacob"));
 		t3.addSubtree(to);
 		t3.addSubtree(new Visitation("Therese"));
 
@@ -44,9 +59,17 @@ public class Visitation extends Tree {
 		tt.addSubtree(new Visitation("William"));
 		tt.addSubtree(new Visitation("Filip"));
 
-		class ShortName implements Visitor {
+		class TraversalV implements Visitor {
 			public int counter = 0;
-			public String s = "Preorder: ";
+			public String s;
+
+			public TraversalV() {
+				init();
+			}
+
+			public void init() {
+				s = "";
+			}
 
 			public void visit(Object data) {
 				s += data.toString() + ", ";
@@ -55,9 +78,12 @@ public class Visitation extends Tree {
 				}
 			}
 		}
-		ShortName v = new ShortName();
+		TraversalV v = new TraversalV();
 		t.preorder(v);
 		System.out.println("Short names: " + v.counter);
-		System.out.println(v.s);
+		System.out.println("Perorder:	" + v.s);
+		t.postorder(v);
+		System.out.println("Postorder:	" + v.s);
+		System.out.println("Inorder:    only in Binary tree!");
 	}
 }
