@@ -18,7 +18,6 @@ public class BinarySearchTreeTest {
 		System.out.println(bst.height());
 		System.out.println(bst.toString());
 		System.out.println();
-		bst.add("W");
 		bst.add("X");
 		bst.add("XX");
 		bst.add("XXX");
@@ -26,6 +25,8 @@ public class BinarySearchTreeTest {
 		System.out.println(bst.height());
 		System.out.println(bst.toString() + "\n");
 		System.out.println(bst.remove("D"));
-		System.out.println(":" + bst.toString());
+		System.out.println(":" + bst.toString() + "\n");
+		System.out.println(bst.remove("XX"));
+		System.out.println(":" + bst.toString() + "\n");
 	}
 }

@@ -115,7 +115,7 @@ public class BinarySearchTree {
 	 * @return result message
 	 */
 	public String remove(Object object) {
-		// find node to be removed
+		// find node   to be removed
 		Node toBeRemoved = root;
 		Node parent = null;
 		boolean found = false;
@@ -162,19 +162,25 @@ public class BinarySearchTree {
 		// ... Find smallest element of the right subtree
 		Node smallestParent = toBeRemoved;
 		Node smallest = toBeRemoved.right;
+		System.out.println("..sp: " + smallestParent + " s: " + smallest);
 		while (smallest.left != null) {
 			smallestParent = smallest;
 			smallest = smallest.left;
+			System.out.println("....sp: " + smallestParent + " s: " + smallest);
 		}
 
 		// smallest contains smallest child in right subtree
 
-		// Move contents, unlik child
+		// Move contents, unlink child
 		toBeRemoved.data = smallest.data;
 		if (smallestParent == toBeRemoved) {
 			smallestParent.right = smallest.right;
+			System.out
+					.println("....=sp: " + smallestParent + " s: " + smallest);
 		} else {
 			smallestParent.left = smallest.right;
+			System.out.println("....!=sp: " + smallestParent + " s: "
+					+ smallest);
 		}
 		ss = "";
 		return object + " removed!" + "\n" + "moved tree: " + "\n"

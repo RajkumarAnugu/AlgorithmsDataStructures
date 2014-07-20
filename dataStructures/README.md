@@ -4,6 +4,8 @@ Data Structures
 
 [Huffman Tree](HuffmanTree.md)
 
+[Binary Search Tree](binarySearchTree.md)
+
 [Algorithms and data structures TDT4120](../README.md)
 
 Linked list
