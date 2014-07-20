@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Tree {
-	private Node root;
+	protected Node root;
 
 	class Node {
 		public Object data;
@@ -24,7 +24,7 @@ public class Tree {
 			String s = "";
 			for (Node child : root.children) {
 				s += relation + " " + (String) child.data + "\n";
-					s += child.tString();
+				s += child.tString();
 			}
 			return s;
 
