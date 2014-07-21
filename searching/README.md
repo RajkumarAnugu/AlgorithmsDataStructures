@@ -21,3 +21,12 @@ Breadth-first
 - Breadth-first search first visits all nodes on the same level before visiting the children.
 
 - use a Queue (first in first out) to track nodes.
+
+Graph:
+--
+
+![Tree](familytree.png)
+
+Bread-First-Search: grandpa, father, mother, Tro, Ole, Kari, Jacob, Ole, Therese, Simon, William, Fillip.
+
+Depth-First-Search: grandpa, father, Tro, Simon, William, Fillip, Ole, Kari, mother, Jacob, Ole, Therese.
