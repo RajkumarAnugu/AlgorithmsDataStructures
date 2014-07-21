@@ -57,7 +57,7 @@ public class LinkedList {
 	 * methods of the outer class can access the public features of the inner
 	 * class.
 	 */
-	class Node {
+	public class Node {
 		public Object data;
 		public Node next;
 	}

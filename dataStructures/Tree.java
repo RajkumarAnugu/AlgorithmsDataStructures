@@ -6,7 +6,17 @@ import java.util.List;
 public class Tree {
 	protected Node root;
 
-	class Node {
+	public Tree(Object rootData) {
+		root = new Node();
+		root.data = rootData;
+		root.children = new ArrayList<Node>();
+	}
+
+	public void addSubtree(Tree subtree) {
+		root.children.add(subtree.root);
+	}
+
+	public class Node {
 		public Object data;
 		public List<Node> children;
 
@@ -42,16 +52,6 @@ public class Tree {
 
 	public int getSize() {
 		return root.size();
-	}
-
-	public Tree(Object rootData) {
-		root = new Node();
-		root.data = rootData;
-		root.children = new ArrayList<Node>();
-	}
-
-	public void addSubtree(Tree subtree) {
-		root.children.add(subtree.root);
 	}
 
 	private int relation;
