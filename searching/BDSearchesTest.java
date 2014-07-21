@@ -32,5 +32,22 @@ public class BDSearchesTest {
 		System.out.println(bds.breadFirst("Filli"));
 		System.out.println(bds.depthFirst("Therese"));
 		System.out.println(bds.depthFirst("KK"));
+		System.out.println("\n" + "BreadthFirstIterator:");
+		BreadthFirstIterator bfi = new BreadthFirstIterator(t.getNode());
+		while (bfi.hasNext()) {
+			System.out.println(bfi.next());
+		}
+		System.out.println("\n" + "DepthFirstIterator:");
+		DepthFirstIterator dfi = new DepthFirstIterator(t.getNode());
+		boolean found = false;
+		String s = "";
+		while (!found && dfi.hasNext()) {
+			Object obj = dfi.next();
+			s += obj.toString() + ", ";
+			if (obj == "Fillip") {
+				found = true;
+			}
+		}
+		System.out.println(s);
 	}
 }
