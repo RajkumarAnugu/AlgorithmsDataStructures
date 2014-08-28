@@ -53,11 +53,11 @@ public class Sprengstoff {
 				return;
 			}
 		} else {
-			//in = new BufferedReader(new InputStreamReader(System.in));
+			// in = new BufferedReader(new InputStreamReader(System.in));
 			try {
 				in = new BufferedReader(
 						new FileReader(
-								"/Users/junjun/Dropbox/universities/ntnu2013/algoritmerDatastrukturer/algorithms/src/tdt4120/sprengstoff.txt"));
+								"/Users/junjun/Dropbox/ntnu2014/algoritmerDatastrukturer/TDT4120/src/tdt4120/sprengstoff.txt"));
 			} catch (FileNotFoundException e) {
 				System.out.println("Kunne ikke åpne filen ");
 				return;
@@ -79,7 +79,7 @@ public class Sprengstoff {
 				System.out.println("ført " + forste.toString()
 						+ " forrige_sist " + forrige_siste + " siste "
 						+ siste.toString());
-				// 
+				//
 				Kubbe newKubbe = forste.neste;
 				Kubbe newforrige = forrige_siste;
 				String forsteneste = "forste";
