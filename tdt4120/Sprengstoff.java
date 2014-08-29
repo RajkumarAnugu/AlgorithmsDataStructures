@@ -3,6 +3,7 @@ package tdt4120;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.InputStreamReader;
 
 /**
  * 
@@ -53,7 +54,7 @@ public class Sprengstoff {
 				return;
 			}
 		} else {
-			// in = new BufferedReader(new InputStreamReader(System.in));
+			in = new BufferedReader(new InputStreamReader(System.in));
 			try {
 				in = new BufferedReader(
 						new FileReader(
@@ -71,10 +72,11 @@ public class Sprengstoff {
 				forrige_siste = siste;
 				int i = Integer.parseInt(linje);
 				siste = new Kubbe(i);
-				if (forste == null)
+				if (forste == null) {
 					forste = siste;
-				else
+				} else {
 					forrige_siste.neste = siste;
+				}
 				linje = in.readLine();
 				System.out.println("ført " + forste.toString()
 						+ " forrige_sist " + forrige_siste + " siste "

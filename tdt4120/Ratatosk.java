@@ -8,7 +8,6 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Queue;
-import java.util.Scanner;
 import java.util.Stack;
 import java.util.StringTokenizer;
 
@@ -29,12 +28,12 @@ public class Ratatosk {
 	 */
 	public static int bfs(Node rot) {
 		// SKRIV DIN KODE HER
-		Queue<Node> queue = new LinkedList<>();// use queue for bfs
+		Queue<Node> queue = new LinkedList<Node>();// use queue for bfs
 		rot.dybde = 0;
 		queue.add(rot);
 		while (queue.size() != 0) {
 			Node aNode = queue.poll();
-			System.out.println("dybd: " + aNode.dybde);
+			// System.out.println("dybd: " + aNode.dybde);
 			if (aNode.ratatosk) {
 				return aNode.dybde;
 			}
@@ -70,7 +69,7 @@ public class Ratatosk {
 		// int result = 0;
 		while (stack.size() != 0) {
 			Node newNode = stack.pop();
-			System.out.println("dybe: " + newNode.dybde);
+			// System.out.println("dybe: " + newNode.dybde);
 			if (newNode.ratatosk) {
 				return newNode.dybde;
 				// result = newNode.dybde;
@@ -115,7 +114,7 @@ public class Ratatosk {
 			}
 			String funksjon = in.readLine().trim();
 			int antallNoder = Integer.parseInt(in.readLine());
-			ArrayList noder = new ArrayList();
+			ArrayList<Node> noder = new ArrayList<Node>();
 			// N: lage en tom list med antall noder :10
 			for (int i = 0; i < antallNoder; i++) {
 				noder.add(new Node());
@@ -139,28 +138,36 @@ public class Ratatosk {
 			} else if (funksjon.equals("bfs")) {
 				System.out.println("" + bfs(rotNode));
 			} else if (funksjon.equals("velg")) {
-				System.out.println("write search method: dfs or bfs");
-				Scanner sc = new Scanner(System.in);
-				String searchMethod = sc.next();
-				sc.close();
-				if (searchMethod.equalsIgnoreCase("dfs")) {
-					System.out.println("" + dfs(rotNode));
-				} else if (searchMethod.equalsIgnoreCase("bfs")) {
-					System.out.println("" + bfs(rotNode));
-				} else {
-					System.out
-							.println("Can not do " + searchMethod + " search");
-				}
+				System.out.println("" + dfs(rotNode));
+				// velgFunction(rotNode);
 			}
 		} catch (IOException ioe) {
 			ioe.printStackTrace();
+		}
+	}
+
+	public static void velgFunction(Node rotNode) throws IOException {
+		System.out.println("write search method: dfs or bfs");
+		// Scanner sc = new Scanner(System.in);
+		// String searchMethod = sc.nextLine();
+		// sc.close();
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		String searchMethod = br.readLine();
+
+		// System.out.println(searchMethod + " method");
+		if (searchMethod.equalsIgnoreCase("dfs")) {
+			System.out.println("" + dfs(rotNode));
+		} else if (searchMethod.equalsIgnoreCase("bfs")) {
+			System.out.println("" + bfs(rotNode));
+		} else {
+			System.out.println("Can not do " + searchMethod + " search");
 		}
 	}
 }
 
 class Node {
 	boolean ratatosk;
-	ArrayList barn;
+	ArrayList<Node> barn;
 	// Denne kan du velge om du vil ha med eller ikke. Det er meningen at den
 	// skal representere
 	// dybden denne noden har i treet, og at det skal regnes ut underveis i din
@@ -170,7 +177,7 @@ class Node {
 
 	public Node() {
 		ratatosk = false;
-		barn = new ArrayList();
+		barn = new ArrayList<Node>();
 		dybde = -1;
 	}
 }
