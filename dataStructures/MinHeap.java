@@ -4,14 +4,21 @@ import java.util.ArrayList;
 
 public class MinHeap {
 
-	private ArrayList<Comparable> elements;
+	private ArrayList<Comparable<Object>> elements;
 
 	public MinHeap() {
-		elements = new ArrayList<Comparable>();
+		elements = new ArrayList<Comparable<Object>>();
 		elements.add(null);
 	}
 
-	public void add(Comparable newElement) {
+	@SuppressWarnings("unchecked")
+	public void add(String object) {
+		// cast String object to Object object
+		// cat Object object to Comparable<Object> object
+		add((Comparable<Object>) (Object) object);
+	}
+
+	public void add(Comparable<Object> newElement) {
 
 		// add a new leaf
 		elements.add(null);
@@ -33,7 +40,7 @@ public class MinHeap {
 	 * 
 	 * @return the minimum element
 	 */
-	public Comparable peek() {
+	public Comparable<Object> peek() {
 		return elements.get(1);
 	}
 
@@ -42,12 +49,12 @@ public class MinHeap {
 	 * 
 	 * @return the minimum element
 	 */
-	public Comparable remove() { // the root
-		Comparable minimum = peek(); //elements.get(1);
+	public Comparable<Object> remove() { // the root
+		Comparable<Object> minimum = peek(); // elements.get(1);
 
 		// Remove last element
 		int lastIndex = elements.size() - 1;
-		Comparable last = elements.remove(lastIndex);
+		Comparable<Object> last = elements.remove(lastIndex);
 
 		if (lastIndex > 1) {
 			elements.set(1, last);
@@ -64,15 +71,15 @@ public class MinHeap {
 	}
 
 	/**
-	 * Turns the tree back into a heap, provided only the root
-	 * node violates the heap condition.
+	 * Turns the tree back into a heap, provided only the root node violates the
+	 * heap condition.
 	 */
 	private void fixHeap() {
 		s += "\n" + "before fix: " + elements.toString();
-		Comparable root = elements.get(1);
+		Comparable<Object> root = elements.get(1);
 
 		int lastIndex = elements.size() - 1;
-		// Promote children of removed root while they are smaller than last      
+		// Promote children of removed root while they are smaller than last
 
 		int index = 1;
 		boolean more = true;
@@ -80,10 +87,10 @@ public class MinHeap {
 			int childIndex = getLeftChildIndex(index);
 			s += "\n" + "fix childIndex: " + childIndex;
 			if (childIndex <= lastIndex) {
-				// Get smaller child 
+				// Get smaller child
 
 				// Get left child first
-				Comparable child = getLeftChild(index);
+				Comparable<Object> child = getLeftChild(index);
 				s += "\n" + "fix child: " + child + " ROOT: " + root;
 				// Use right child instead if it is smaller
 				if (getRightChildIndex(index) <= lastIndex
@@ -125,8 +132,8 @@ public class MinHeap {
 
 	/**
 	 * For convenience, we leave the 0 element of the array empty. Then the
-	 * child nodes of the node with index i have index 2 · i
-	 * and2·i+1, and the parent node of the node with index i has index i 2.
+	 * child nodes of the node with index i have index 2 · i and2·i+1, and the
+	 * parent node of the node with index i has index i 2.
 	 */
 
 	/**
@@ -169,7 +176,7 @@ public class MinHeap {
 	 *            the index of a node in this heap
 	 * @return the value of the left child of the given node
 	 */
-	private Comparable getLeftChild(int index) {
+	private Comparable<Object> getLeftChild(int index) {
 		return elements.get(2 * index);
 	}
 
@@ -180,7 +187,7 @@ public class MinHeap {
 	 *            the index of a node in this heap
 	 * @return the value of the right child of the given node
 	 */
-	private Comparable getRightChild(int index) {
+	private Comparable<Object> getRightChild(int index) {
 		return elements.get(2 * index + 1);
 	}
 
@@ -191,11 +198,11 @@ public class MinHeap {
 	 *            the index of a node in this heap
 	 * @return the value of the parent of the given node
 	 */
-	private Comparable getParent(int index) {
+	private Comparable<Object> getParent(int index) {
 		return elements.get(index / 2);
 	}
 
-	public ArrayList<Comparable> getElements() {
+	public ArrayList<Comparable<Object>> getElements() {
 		return elements;
 	}
 }
