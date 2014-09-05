@@ -7,12 +7,14 @@ public class BinarySearchTree {
 		root = null;
 	}
 
-	//	public void add(Object obj) {
-	//		Comparable<Object> object = (Comparable<Object>) obj;
-	//		add(object);
-	//	}
+	@SuppressWarnings("unchecked")
+	public void add(String object) {
+		// cast String object to Object object
+		// cat Object object to Comparable<Object> object
+		add((Comparable<Object>) (Object) object);
+	}
 
-	public void add(Comparable object) {
+	public void add(Comparable<Object> object) {
 		Node newNode = new Node();
 		newNode.data = object;
 		newNode.left = null;
@@ -25,7 +27,7 @@ public class BinarySearchTree {
 	}
 
 	class Node {
-		public Comparable data;
+		public Comparable<Object> data;
 		public Node left;
 		public Node right;
 
@@ -115,7 +117,7 @@ public class BinarySearchTree {
 	 * @return result message
 	 */
 	public String remove(Object object) {
-		// find node   to be removed
+		// find node to be removed
 		Node toBeRemoved = root;
 		Node parent = null;
 		boolean found = false;
