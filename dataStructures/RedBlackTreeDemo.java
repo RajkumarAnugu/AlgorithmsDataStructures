@@ -60,7 +60,7 @@ public class RedBlackTreeDemo {
 		t.remove("F"); // Removing element with two children
 		System.out.println("TestRemove ROOT: " + t.root.data.toString() + ": "
 				+ t.cString());
-		t.remove("D"); // Removing root    
+		t.remove("D"); // Removing root
 		System.out.println("TestRemove ROOT: " + t.root.data.toString() + ": "
 				+ t.cString());
 
@@ -70,8 +70,7 @@ public class RedBlackTreeDemo {
 
 	/**
 	 * Inserts all permutations of a string into a red-black tree and checks
-	 * that
-	 * it contains the strings afterwards.
+	 * that it contains the strings afterwards.
 	 * 
 	 * @param letters
 	 *            a string of letters without repetition
@@ -89,17 +88,17 @@ public class RedBlackTreeDemo {
 	}
 
 	/**
-	 * Tests removal, given a template for a tree with a black node that
-	 * is to be deleted. All other nodes should be given all possible
-	 * combinations
-	 * of red and black.
+	 * Tests removal, given a template for a tree with a black node that is to
+	 * be deleted. All other nodes should be given all possible combinations of
+	 * red and black.
 	 * 
 	 * @param t
 	 *            the template for the test cases
 	 */
 	public static void removalTest(RedBlackTree t) {
 		for (int m = 0; m <= 1; m++) {
-			int nodesToColor = count(t.root) - 2; // We don't recolor the root or toDelete
+			int nodesToColor = count(t.root) - 2; // We don't recolor the root
+													// or toDelete
 			for (int k = 0; k < Math.pow(2, nodesToColor); k++) {
 				RedBlackTree rb = new RedBlackTree();
 				if (m == 0) {
@@ -144,14 +143,14 @@ public class RedBlackTreeDemo {
 					good = false;
 				}
 				if (good) {
-					Comparable d = toDelete.data;
+					Comparable<Object> d = toDelete.data;
 					rb.remove(d);
 					checkRedBlack(rb);
 					for (Integer j = 0; j < filledSize; j++) {
 						if (!rb.find(j) && !d.equals(j)) {
 							throw new IllegalStateException(j + " deleted");
 						}
-						if (rb.find(d)) {
+						if (rb.find((Integer) (Object) d)) {
 							throw new IllegalStateException(d + " not deleted");
 						}
 					}
@@ -163,22 +162,14 @@ public class RedBlackTreeDemo {
 	/**
 	 * Makes a template for testing removal.
 	 * 
-	 * @return a partially complete red-black tree for the test.
-	 *         The node to be removed is black.
+	 * @return a partially complete red-black tree for the test. The node to be
+	 *         removed is black.
 	 */
 	private static RedBlackTree removalTestTemplate() {
 		RedBlackTree template = new RedBlackTree();
 
 		/*
-		 * n7
-		 * / \
-		 * n1 n8
-		 * / \
-		 * n0 n3
-		 * / \
-		 * n2* n5
-		 * /\
-		 * n4 n6
+		 * n7 / \ n1 n8 / \ n0 n3 / \ n2* n5 /\ n4 n6
 		 */
 
 		RedBlackTree.Node[] n = new RedBlackTree.Node[9];
@@ -332,7 +323,11 @@ public class RedBlackTreeDemo {
 	private static int populate(RedBlackTree t) {
 		RedBlackTree.Node[] nodes = getNodes(t);
 		for (int i = 0; i < nodes.length; i++) {
-			nodes[i].data = new Integer(i);
+			Integer x = new Integer(i);
+			Object z = (Object) x;
+			@SuppressWarnings("unchecked")
+			Comparable<Object> co = (Comparable<Object>) z;
+			nodes[i].data = co;
 		}
 		return nodes.length;
 	}
@@ -358,8 +353,7 @@ public class RedBlackTreeDemo {
 
 	/**
 	 * Checks that the tree with the given node is a red-black tree, and throws
-	 * an
-	 * exception if a structural error is found.
+	 * an exception if a structural error is found.
 	 * 
 	 * @param n
 	 *            the root of the subtree to check
@@ -459,7 +453,7 @@ class PermutationGenerator {
 					.getPermutations();
 
 			// Add the removed character to the front of
-			// each permutation of the simpler word, 
+			// each permutation of the simpler word,
 			for (String s : shorterWordPermutations) {
 				permutations.add(word.charAt(i) + s);
 			}

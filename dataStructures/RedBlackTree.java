@@ -5,12 +5,12 @@ package dataStructures;
  * 22. jul. 2014
  * 
  *
- * insertion and removal in a binary search tree are O(log(n))
- * operations provided that the tree is balanced. In red-black trees, a
- * special kind of binary search tree that rebalances itself after each
- * insertion or removal. With red-black trees, we can guarantee
- * efficiency of these operations. In fact, the Java Collections
- * framework uses red-black trees to implement tree sets and tree maps.
+ * insertion and removal in a binary search tree are O(log(n)) operations
+ * provided that the tree is balanced. In red-black trees, a special kind of
+ * binary search tree that rebalances itself after each insertion or removal.
+ * With red-black trees, we can guarantee efficiency of these operations. In
+ * fact, the Java Collections framework uses red-black trees to implement tree
+ * sets and tree maps.
  * 
  * 
  */
@@ -25,12 +25,19 @@ public class RedBlackTree {
 		root = null;
 	}
 
+	@SuppressWarnings("unchecked")
+	public void add(String object) {
+		// cast String object to Object object
+		// cat Object object to Comparable<Object> object
+		add((Comparable<Object>) (Object) object);
+	}
+
 	/**
 	 * 
 	 * @param object
 	 *            insert a new node into the tree
 	 */
-	public void add(Comparable object) {
+	public void add(Comparable<Object> object) {
 		Node newNode = new Node();
 		newNode.data = object;
 		newNode.left = null;
@@ -48,7 +55,7 @@ public class RedBlackTree {
 	 * @param object
 	 * @return true if object is contained in the tree
 	 */
-	public boolean find(Comparable object) {
+	public boolean find(Comparable<Integer> object) {
 		Node current = root;
 		while (current != null) {
 			int d = current.data.compareTo(object);
@@ -63,7 +70,14 @@ public class RedBlackTree {
 		return false;
 	}
 
-	public void remove(Comparable object) {
+	@SuppressWarnings("unchecked")
+	public void remove(String object) {
+		// cast String object to Object object
+		// cat Object object to Comparable<Object> object
+		remove((Comparable<Object>) (Object) object);
+	}
+
+	public void remove(Comparable<Object> object) {
 		// find node to be removed
 
 		Node toBeRemoved = root;
@@ -151,7 +165,7 @@ public class RedBlackTree {
 	}
 
 	public static class Node {
-		public Comparable data;
+		public Comparable<Object> data;
 		public Node left;
 		public Node right;
 		public Node parent;
@@ -167,18 +181,18 @@ public class RedBlackTree {
 		public String getColor() {
 			String s = "";
 			switch (color) {
-				case 1:
-					s = "BLACK";
-					break;
-				case 0:
-					s = "RED";
-					break;
-				case -1:
-					s = "NEGATIVE_RED";
-					break;
-				case 2:
-					s = "DOUBLE_BLACK";
-					break;
+			case 1:
+				s = "BLACK";
+				break;
+			case 0:
+				s = "RED";
+				break;
+			case -1:
+				s = "NEGATIVE_RED";
+				break;
+			case 2:
+				s = "DOUBLE_BLACK";
+				break;
 			}
 
 			return s;
@@ -235,7 +249,7 @@ public class RedBlackTree {
 	 *            node n
 	 */
 	public void fixAfterAdd(Node n) {
-		if (n.parent == null) {//root
+		if (n.parent == null) {// root
 			n.color = BLACK;
 		} else {
 			n.color = RED;
@@ -264,7 +278,7 @@ public class RedBlackTree {
 		if (parent == grandParent.left) {// parent at left
 			n3 = grandParent;
 			t4 = grandParent.right;
-			if (child == parent.left) {// child at left 
+			if (child == parent.left) {// child at left
 				n1 = child;
 				n2 = parent;
 				t1 = child.left;
@@ -294,7 +308,7 @@ public class RedBlackTree {
 				t4 = child.right;
 			}
 		}
-		replaceWith(grandParent, n2);// replace 
+		replaceWith(grandParent, n2);// replace
 		// set new link
 		n1.setLeftChild(t1);
 		n1.setRightChild(t2);
@@ -323,8 +337,9 @@ public class RedBlackTree {
 		if (toBeRemoved.color == RED) {
 			return;
 		}
-		if (toBeRemoved.left != null || toBeRemoved.right != null) {// it's no a leaf
-			//Color the child black
+		if (toBeRemoved.left != null || toBeRemoved.right != null) {// it's no a
+																	// leaf
+			// Color the child black
 			if (toBeRemoved.left == null) {
 				toBeRemoved.right.color = BLACK;
 			} else {
@@ -384,8 +399,7 @@ public class RedBlackTree {
 
 	/**
 	 * updates the parent's and replacement node's links when this node is
-	 * replaced.
-	 * updates the root reference if it is replaced;
+	 * replaced. updates the root reference if it is replaced;
 	 * 
 	 * @param toBeReplaced
 	 *            ; to be replaced node
@@ -396,9 +410,10 @@ public class RedBlackTree {
 		if (toBeReplaced.parent == null) {// is root
 			replacement.parent = null;
 			root = replacement;
-		} else if (toBeReplaced == toBeReplaced.parent.left) {//tBR is a left node
+		} else if (toBeReplaced == toBeReplaced.parent.left) {// tBR is a left
+																// node
 			toBeReplaced.parent.setLeftChild(replacement);
-		} else {//tBR is right node
+		} else {// tBR is right node
 			toBeReplaced.parent.setRightChild(replacement);
 		}
 	}
