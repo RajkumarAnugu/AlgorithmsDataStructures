@@ -21,7 +21,8 @@ public class HashSet {
 
 	public boolean contains(Object x) {
 		outprint += "boolean contains Object x\n";
-		int h = x.hashCode();// hashCode method consistently return the same integer
+		int h = x.hashCode();// hashCode method consistently return the same
+								// integer
 		outprint += "    x.hashCode: " + h + "\n";
 		if (h < 0) {
 			h = -h;
@@ -111,7 +112,7 @@ public class HashSet {
 	}
 
 	class Node {
-		//outprint+="create Node\n";
+		// outprint+="create Node\n";
 		public Object data;
 		public Node next;
 	}
@@ -121,7 +122,7 @@ public class HashSet {
 		private int bucketIndex;
 		private Node current;
 
-		//outprint+="HashSetIterator implements Iterator\n";
+		// outprint+="HashSetIterator implements Iterator\n";
 		public HashSetIterator() {
 			current = null;
 			bucketIndex = -1;
