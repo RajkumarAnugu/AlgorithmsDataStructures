@@ -1,7 +1,5 @@
 package graph;
 
-import java.util.HashSet;
-
 /**
  * Introduction to Algorithms Third Edition
  * Page 627: 23.1 Growing a minimum spanning tree
@@ -13,10 +11,17 @@ public class GenericMSTtest {
 	public static void main(String[] args) {
 		int[][] wgraph = new Input("GenericMST").getWeightedUDgraph();
 		GenericMST gmst = new GenericMST(wgraph);
-		System.out.println("\nA size: " + gmst.getMST().size());
 		for (Edge e : gmst.getMST()) {
 			System.out.println(e.toString());
 		}
+
+		System.out.println("Minimum Cost: " + gmst.getMinimumCost());
+
+		// for (Edge ee : gmst.getEdges()) {
+		// System.out.println("ee.toString() : " + ee.toString());
+		// }
+		// gmst.getMST();
+		// System.out.println("\nA size: " + gmst.getMST().size());
 
 		// HashSet<Integer> hs = new HashSet<Integer>();
 		// hs.add(1);
@@ -40,10 +45,10 @@ public class GenericMSTtest {
 		// }
 	}
 
-	public static void prinths(HashSet<Integer> hs) {
-		for (Integer i : hs) {
-			System.out.println(i);
-		}
-		System.out.println("H s size: " + hs.size() + "\n");
-	}
+	// public static void prinths(HashSet<Integer> hs) {
+	// for (Integer i : hs) {
+	// System.out.println(i);
+	// }
+	// System.out.println("H s size: " + hs.size() + "\n");
+	// }
 }
