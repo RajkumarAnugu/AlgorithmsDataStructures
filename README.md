@@ -1,4 +1,4 @@
-TDT4120
+Algorithms and data structures
 =======
 
 TDT4120 Algoritmer og datastrukurer (Algorithms and data structures)
