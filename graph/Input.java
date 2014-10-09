@@ -7,6 +7,7 @@ import java.io.FileReader;
 /**
  * This class have build in methods which parser input
  * to undriect graph(weight and unweight)
+ * <p>
  * 
  * Input must be n*n adjacency matrix!
  * 
@@ -45,15 +46,15 @@ public class Input {
 	}
 
 	/**
-	 * build a undirected graph with weight(double) represent by an adjacency
-	 * matrix
-	 * 6 //matrix size
-	 * 0 1 1 0 0 0 // each position is a double,
-	 * 0 0 0 1 0 0 // there is a space between each double
-	 * 0 0 0 1 1 0
-	 * 0 0 0 0 0 21
-	 * 0 1 0 1 0 1.1
-	 * 0 0 0 1 0 0
+	 * build a undirected graph with weight(int) represent by an adjacency
+	 * matrix<br>
+	 * 6 //matrix size<br>
+	 * 0 1 1 0 0 0 // each position is a int,<br>
+	 * 0 0 0 1 0 0 // there is a space between each int<br>
+	 * 0 0 0 1 1 0<br>
+	 * 0 0 0 0 0 21<br>
+	 * 0 1 0 1 0 1<br>
+	 * 0 0 0 1 0 0<br>
 	 * 
 	 * 
 	 */
@@ -89,14 +90,14 @@ public class Input {
 	}
 
 	/**
-	 * build a undirected graph represent by an (boolean) adjacency matrix
-	 * 6 matrix size
-	 * 011000 // 1 true; 0 false
-	 * 000100 // no space in between
-	 * 000110
-	 * 000001
-	 * 010101
-	 * 000100
+	 * build a undirected graph represent by an (boolean) adjacency matrix<br>
+	 * 6 matrix size<br>
+	 * 011000 // 1 true; 0 false<br>
+	 * 000100 // no space in between<br>
+	 * 000110<br>
+	 * 000001<br>
+	 * 010101<br>
+	 * 000100<br>
 	 * 
 	 * 
 	 */
