@@ -20,41 +20,29 @@ import java.util.ArrayList;
  *
  */
 public class Node {
-	private Node parent;
+	private Node parent; // predecessor
 	private ArrayList<Node> children;
-	private String color;
 	private int value;
 	private int weight;
+	public String color = "WHITE";
+	public int distance = 999;
 
 	public Node() {
+		this.parent = null;
 		children = new ArrayList<Node>();
+		this.value = 0;
+		this.weight = 0;
 	}
 
 	/**
 	 * @param parent
 	 * @param children
-	 * @param color
-	 * @param value
-	 */
-	public Node(Node parent, ArrayList<Node> children, String color, int value) {
-		this.parent = parent;
-		this.children = children;
-		this.color = color;
-		this.value = value;
-	}
-
-	/**
-	 * @param parent
-	 * @param children
-	 * @param color
 	 * @param value
 	 * @param weight
 	 */
-	public Node(Node parent, ArrayList<Node> children, String color, int value,
-			int weight) {
+	public Node(Node parent, ArrayList<Node> children, int value, int weight) {
 		this.parent = parent;
 		this.children = children;
-		this.color = color;
 		this.value = value;
 		this.weight = weight;
 	}
@@ -100,21 +88,6 @@ public class Node {
 	}
 
 	/**
-	 * @return the color
-	 */
-	public String getColor() {
-		return color;
-	}
-
-	/**
-	 * @param color
-	 *            the color to set
-	 */
-	public void setColor(String color) {
-		this.color = color;
-	}
-
-	/**
 	 * @return the value
 	 */
 	public int getValue() {
@@ -145,6 +118,40 @@ public class Node {
 	 */
 	public void setWeight(int weight) {
 		this.weight = weight;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "[ " + showValue() + " color=" + color + ", distance="
+				+ distance + " ]";
+
+		// return "Node [parent=" + parent + ", children=" + children +
+		// ", color="
+		// + color + ", value=" + value + ", weight=" + weight + "]";
+	}
+
+	/**
+	 * 
+	 * @return Node size
+	 */
+	public int size() {
+		int sum = 0;
+		for (Node child : children) {
+			sum += child.size();
+		}
+		return 1 + sum;
+	}
+
+	public String showValue() {
+		if (parent == null) {
+			return "parent: null - child: " + getValue();
+		}
+		return "parent: " + parent.getValue() + " - child: " + getValue();
 	}
 
 }
