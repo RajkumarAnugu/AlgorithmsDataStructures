@@ -25,7 +25,9 @@ public class Node {
 	private int value;
 	private int weight;
 	public String color = "WHITE";
-	public int distance = 999;
+	public int distance = Integer.MAX_VALUE;
+    public int d = Integer.MAX_VALUE;
+    public Object pi=null;
 
 	public Node() {
 		this.parent = null;

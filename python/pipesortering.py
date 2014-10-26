@@ -1,10 +1,13 @@
 from sys import stdin
 
+
 def sorter(A):
     # Merk: den sorterte lista ma returneres
     # START IKKE-UTDELT KODE
     quicksort(A, 0, len(A) - 1)
     return A
+
+
 def quicksort(A, i, k):
     if i < k:
         p = partition(A, i, k)
@@ -31,6 +34,7 @@ def partition(array, left, right):
     return storeindex
     # SLUTT IKKE-UTDELT KODE
 
+
 def finn(A, nedre, ovre):
     # Merk: resultatet ma returneres
     # START IKKE-UTDELT KODE
@@ -41,6 +45,7 @@ def finn(A, nedre, ovre):
     if A[indeks_ovre] < ovre and indeks_ovre != len(A) - 1:
         indeks_ovre += 1
     return [A[indeks_nedre], A[indeks_ovre]]
+
 
 def binsok(A, verdi):
     l = 0
@@ -54,6 +59,7 @@ def binsok(A, verdi):
         else:
             l = m + 1
     return m
+
 # SLUTT IKKE-UTDELT KODE
 
 liste = []
@@ -67,4 +73,5 @@ for linje in stdin:
     minst = int(ord[0])
     maks = int(ord[1])
     resultat = finn(sortert, minst, maks)
-    print str(resultat[0]) + " " + str(resultat[1])
+    print
+    str(resultat[0]) + " " + str(resultat[1])
