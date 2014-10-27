@@ -1,6 +1,5 @@
 package graph;
 
-import java.util.List;
 
 /**
  * This class will generate a Graph from a matrix

@@ -1,6 +1,5 @@
 package graph;
 
-import com.sun.tools.javac.jvm.Gen;
 
 /**
  * The bellman Ford algorithm returns a boolean value indicating whether or not there is a negative-weight cycle that is
@@ -9,12 +8,8 @@ import com.sun.tools.javac.jvm.Gen;
  * Created by GuoJunjun on 26.10.14.
  */
 public class BellmanFord {
-    public static final int MAX_VALUE = java.lang.Integer.MAX_VALUE;
-    private G G;
-    public BellmanFord(G G){
-        this.G=G;
-    }
-    public boolean Bellman_Ford() {
+
+    public static boolean Bellman_Ford(G G) {
         int s = 1; // start vertex s
         G = initializeSingleSource(G, s);
         for (int i = 1; i < G.getV().length - 1; i++) {
@@ -30,9 +25,11 @@ public class BellmanFord {
             Node v = G.getV()[e.getvB()];
             int w = e.getweight();
             if (v.d > u.d + w) {
+                System.out.println(G);
                 return false;
             }
         }
+        System.out.println(G);
         return true;
     }
 
@@ -42,16 +39,16 @@ public class BellmanFord {
      * @param s
      *         int s: the number of vertex start with 1
      */
-    public G initializeSingleSource(G G, int s) {
+    public static G initializeSingleSource(G G, int s) {
         for (int i = 0; i < G.getV().length; i++) {
-            G.getV()[i].d = MAX_VALUE;
+            G.getV()[i].d = Integer.MAX_VALUE;
             G.getV()[i].pi = null;
         }
         G.getV()[s - 1].d = 0;
         return G;
     }
 
-    public void relax(Node u, Node v, int w) {
+    public static void relax(Node u, Node v, int w) {
         if (v.d > u.d + w) {
             v.d = u.d + w;
             v.pi = u;
@@ -67,7 +64,6 @@ public class BellmanFord {
      */
     public static void main(String[] args) {
         // figure 244
-        int n = 5;
         int[][] adjacencyMatrix = {
                 //1,2, 3, 4, 5
                 {0, 6, 0, 0, 7}, //1
@@ -78,6 +74,7 @@ public class BellmanFord {
         };
 
         G G = new G(adjacencyMatrix);
-        System.out.println(new BellmanFord(G).Bellman_Ford());
+        System.out.println(G);
+        System.out.println(BellmanFord.Bellman_Ford(G));
     }
 }

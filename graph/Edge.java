@@ -52,7 +52,7 @@ public class Edge implements Comparable<Edge> {
 
     @Override
     public String toString() {
-        return "v" + vA + " --> v" + vB + " cost:" + wt;
+        return "v" + vA + "->v" + vB + " cost:" + wt;
 
     }
 }

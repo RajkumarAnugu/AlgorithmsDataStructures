@@ -155,5 +155,7 @@ public class Node {
 		}
 		return "parent: " + parent.getValue() + " - child: " + getValue();
 	}
-
+    public String showG(){
+        return "v-"+value+"; d-"+d+"; Pi-"+pi;
+    }
 }
