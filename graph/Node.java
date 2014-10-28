@@ -11,7 +11,7 @@ import java.util.ArrayList;
  *
  * @author GuoJunjun
  */
-public class Node {
+public class Node implements Comparable<Object> {
     private Node parent; // predecessor
     private ArrayList<Node> children;
     private int value;
@@ -145,7 +145,6 @@ public class Node {
     }
 
     /**
-     *
      * @return a String show value d and pi information for graph {@link graph.G}
      */
     public String showG() {
@@ -167,9 +166,24 @@ public class Node {
         }
         for (Node child : n.children) {
             if (child.color == "WHITE") {
-                s += "v:" + child.getValue() + " w:" + child.getWeight() + "\n" + bellmanFord(child);
+                //                s += "v:" + child.getValue() + " w:" + child.getWeight() + "\n" + bellmanFord(child);
+                s += "v:" + child.getValue() + " w:" + child.d + "\n" + bellmanFord(child);
             }
         }
         return s;
     }
+
+    /**
+     * @return a String show value d and pi information for graph {@link graph.G}
+     */
+    public String toStringDijkstra() {
+        return "v:" + value + "; d:" + d;
+    }
+
+    @Override
+    public int compareTo(Object o) {
+        int value = d-((Node) o).d;
+        return value;
+    }
+
 }
