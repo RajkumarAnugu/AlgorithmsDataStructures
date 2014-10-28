@@ -1,9 +1,13 @@
 package graph;
 
 
+
 /**
  * The bellman Ford algorithm returns a boolean value indicating whether or not there is a negative-weight cycle that is
  * reachable from the source ...
+ * <p/>
+ * The Bellman–Ford algorithm is an algorithm that computes shortest paths from a single source vertex to all of the
+ * other vertices in a weighted digraph.
  * <p/>
  * Created by GuoJunjun on 26.10.14.
  */
@@ -11,12 +15,23 @@ public class BellmanFord {
 
     public static boolean Bellman_Ford(G G) {
         int s = 1; // start vertex s
+        Node path = new Node(); // path is the result path
         G = initializeSingleSource(G, s);
         for (int i = 1; i < G.getV().length - 1; i++) {
             for (Edge e : G.getE()) {
                 Node u = G.getV()[e.getvA()];
                 Node v = G.getV()[e.getvB()];
                 int w = e.getweight();
+                if (u.getValue() == 0) {
+                    path = u;
+                    path.setParent(null);
+                    path.setWeight(0);
+                }
+                if (v.d > u.d + w) {
+                    v.setParent(u);
+                    u.addChild(v);
+                    v.setWeight(w + u.getWeight());
+                }
                 relax(u, v, w);
             }
         }
@@ -25,11 +40,11 @@ public class BellmanFord {
             Node v = G.getV()[e.getvB()];
             int w = e.getweight();
             if (v.d > u.d + w) {
-                System.out.println(G);
                 return false;
             }
         }
-        System.out.println(G);
+
+        System.out.println("path weight: \n"+path.bellmanFord(path));
         return true;
     }
 
@@ -74,7 +89,6 @@ public class BellmanFord {
         };
 
         G G = new G(adjacencyMatrix);
-        System.out.println(G);
         System.out.println(BellmanFord.Bellman_Ford(G));
     }
 }

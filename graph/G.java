@@ -1,7 +1,6 @@
 package graph;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 /**
  * G = Graph (V, E) Vertex, Edge
@@ -42,16 +41,5 @@ public class G {
     public ArrayList<Edge> getE() {
         return E;
     }
-
-    @Override
-    public String toString() {
-        String stringV="";
-        for (Node n : V) {
-            stringV+=n.showG()+" | ";
-        }
-        return "G{\n" +
-                "V=" +stringV+
-                "\nE=" + E +
-                "\n}";
-    }
+    
 }
