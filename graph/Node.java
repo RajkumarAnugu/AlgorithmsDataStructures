@@ -2,7 +2,6 @@ package graph;
 
 
 import java.util.ArrayList;
-import java.util.Stack;
 
 /**
  * Node class with
@@ -145,10 +144,22 @@ public class Node {
         return "parent: " + parent.getValue() + " - child: " + getValue();
     }
 
+    /**
+     *
+     * @return a String show value d and pi information for graph {@link graph.G}
+     */
     public String showG() {
         return "v:" + value + "; d:" + d + "; Pi:" + pi;
     }
 
+    /**
+     * use for bellman Ford
+     *
+     * @param n,
+     *         root Node n
+     *
+     * @return a string show root path to every Nodes and its weight
+     */
     public String bellmanFord(Node n) {
         String s = "";
         if (n.color == "WHITE") {
@@ -156,7 +167,7 @@ public class Node {
         }
         for (Node child : n.children) {
             if (child.color == "WHITE") {
-                s += "v:" + child.getValue() + " w:" + child.getWeight() + "\n"+bellmanFord(child);
+                s += "v:" + child.getValue() + " w:" + child.getWeight() + "\n" + bellmanFord(child);
             }
         }
         return s;

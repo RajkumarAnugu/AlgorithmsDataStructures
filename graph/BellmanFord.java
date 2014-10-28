@@ -1,7 +1,6 @@
 package graph;
 
 
-
 /**
  * The bellman Ford algorithm returns a boolean value indicating whether or not there is a negative-weight cycle that is
  * reachable from the source ...
@@ -12,7 +11,12 @@ package graph;
  * Created by GuoJunjun on 26.10.14.
  */
 public class BellmanFord {
-
+    /**
+     * @param G
+     *         {@link graph.G}
+     *
+     * @return True if there is a solution and print out the result before the returned value
+     */
     public static boolean Bellman_Ford(G G) {
         int s = 1; // start vertex s
         Node path = new Node(); // path is the result path
@@ -44,7 +48,7 @@ public class BellmanFord {
             }
         }
 
-        System.out.println("path weight: \n"+path.bellmanFord(path));
+        System.out.println("path weight: \n" + path.bellmanFord(path));
         return true;
     }
 
@@ -63,6 +67,11 @@ public class BellmanFord {
         return G;
     }
 
+    /**
+     * @param u
+     * @param v
+     * @param w
+     */
     public static void relax(Node u, Node v, int w) {
         if (v.d > u.d + w) {
             v.d = u.d + w;
@@ -71,7 +80,7 @@ public class BellmanFord {
     }
 
     /**
-     * Bellman Ford algorithmer Test
+     * Bellman Ford algorithm Test
      * <p/>
      * Page 652
      *
