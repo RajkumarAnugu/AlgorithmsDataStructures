@@ -6,6 +6,7 @@ def minCoinsGreedy(coins, value):
     currentCoin = 0
     numCoins = 0
     while value > 0:
+        # print(coins[currentCoin], value)
         if coins[currentCoin] <= value:
             value -= coins[currentCoin]
             numCoins += 1
@@ -15,41 +16,23 @@ def minCoinsGreedy(coins, value):
     # SLUTT IKKE-UTDELT KODE
 
 def minCoinsDynamic(coins, value):
-    # START IKKE-UTDELT KODE
-    result = []
-    pos = []
-    result.append(minCoinsGreedy(coins,value))
-    for i in range(len(coins)-1):
-        if coins[i] < coins[i + 1] * 2:
-            pos.append(i)
-    for x in pos:
-        cpcoins = coins[:]#copy.deepcopy(coins)
-        cpcoins.remove(cpcoins[x])
-        result.append(minCoinsGreedy(cpcoins,value))
-    result.sort()
-    # print(result)
-    return result[0]
-
-
-# results = [Inf] * (value + 1)
-# print(results)
-# usefulCoins = []
-# for c in coins:
-# if c <= value:
-#         results[c] = 1
-#         usefulCoins.append(c)
-# for curVal in range(1, value + 1):
-#     if results[curVal] != Inf:
-#         continue
-#     best = Inf
-#     for c in usefulCoins:
-#         if c <= curVal:
-#             current = 1 + results[curVal - c]
-#             if current < best:
-#                 best = current
-#     results[curVal] = best
-# return results[value]
-# SLUTT IKKE-UTDELT KODE
+    results = [Inf] * (value + 1)
+    usefulCoins = []
+    for c in coins:
+        if c <= value:
+            results[c] = 1
+            usefulCoins.append(c)
+    for curVal in range(1, value + 1):
+        if results[curVal] != Inf:
+            continue
+        best = Inf
+        for c in usefulCoins:
+            if c <= curVal:
+                current = 1 + results[curVal - c]
+                if current < best:
+                    best = current
+        results[curVal] = best
+    return results[value]
 
 def canUseGreedy(coins):
     # bare returner False her hvis du ikke klarer aa finne ut
