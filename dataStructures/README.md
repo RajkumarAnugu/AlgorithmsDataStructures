@@ -1,6 +1,6 @@
 Data Structures
 ==
-
+[Home](../README.md)
 
 [Huffman Tree](HuffmanTree.md)
 
@@ -9,6 +9,8 @@ Data Structures
 [Tree Traversal](treeTraversal.md)
 
 [Algorithms and data structures TDT4120](../README.md)
+
+[Algorithms](../algorithms.md)
 
 Linked list
 --
