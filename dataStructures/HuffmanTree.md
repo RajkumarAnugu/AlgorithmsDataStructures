@@ -7,7 +7,7 @@ In a Huffman tree, the leaves contain symbols that we want to encode. To encode 
 
 code:
 
-```
+```Java
 ...
 while (nodes.size() > 1) {
             Node smallest = nodes.remove();

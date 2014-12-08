@@ -9,7 +9,7 @@ Binary Search Tree
 Binary Search Tree: remove
 --
 
-```
+```Java
 /**
  * 
  * @param object
@@ -39,7 +39,7 @@ public String remove(Object object) {
 ```
 ![Remove a Node with no or one child](binarysearchtree1.png)
 
-```
+```Java
     // to be removed contains object
     // . . if one of the children is empty, use the other
     if (toBeRemoved.left == null || toBeRemoved.right == null) {
@@ -70,7 +70,7 @@ To locate the next larger value, go to the right subtree and find its smallest d
 
 ![Removing a Node with Two Children](binarysearchtree2.png)
 
-```
+```Java
     // Neither subtree is empty
     // ... Find smallest element of the right subtree
     Node smallestParent = toBeRemoved;

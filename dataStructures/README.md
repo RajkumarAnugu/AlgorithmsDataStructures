@@ -42,7 +42,7 @@ Stacks and Queues:
 
 - In a circular array implementation of a queue, element locations wrap from the end of the array to the beginning. 
 
-```
+```Java
  
     class Stack 
     ...........
