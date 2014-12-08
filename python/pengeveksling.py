@@ -15,23 +15,49 @@ def minCoinsGreedy(coins, value):
     return numCoins
     # SLUTT IKKE-UTDELT KODE
 
+def minCoinsMixed(coins, value):
+    # START IKKE-UTDELT KODE
+    result = []      #result list skal ha alle resultat
+    pos = []         #pos skal husk hvilken mynt gjøre det feil å bruke grådig algoritme
+    result.append(minCoinsGreedy(coins, value))
+    for i in range(len(coins) - 1):
+        if coins[i] < coins[i + 1] * 2:
+            pos.append(i)
+    cpcoins = coins[:]
+    for x in pos:
+        if (x < len(cpcoins)):
+            cpcoins.remove(cpcoins[x])
+            result.append(minCoinsGreedy(cpcoins, value))
+    for x in pos:
+        cpcoins = coins[:]
+        cpcoins.remove(cpcoins[x])
+        result.append(minCoinsGreedy(cpcoins, value))
+    result.sort()
+    # print(result)
+    return result[0]
+
 def minCoinsDynamic(coins, value):
     results = [Inf] * (value + 1)
+    print("Dynamic- lage en results list: size: "+str(len(results))+"; value: "+str(value))
     usefulCoins = []
-    for c in coins:
+    for c in coins:                     #fule opp mynt som kan brukes
         if c <= value:
-            results[c] = 1
+            results[c] = 1              #sette results[mynt] = 1
             usefulCoins.append(c)
-    for curVal in range(1, value + 1):
-        if results[curVal] != Inf:
-            continue
+    print("useful mynt: "+str(usefulCoins))
+    print("results: "+str(results))
+    for curVal in range(1, value + 1):  #loop gjennom results fra index 1 til utover
+        if results[curVal] != Inf:      #hvis mynt = curVal burkes 
+            continue                    #tilbake til for loop
         best = Inf
         for c in usefulCoins:
-            if c <= curVal:
+            if c <= curVal:             #curVal
                 current = 1 + results[curVal - c]
                 if current < best:
                     best = current
+            print ("curVal: "+str(curVal)+"; results: "+str(results))
         results[curVal] = best
+        print ("curVal: "+str(curVal)+"; results: "+str(results))
     return results[value]
 
 def canUseGreedy(coins):
@@ -54,13 +80,13 @@ for c in stdin.readline().split():
     coins.append(int(c))
 coins.sort()
 coins.reverse()
-# print(coins)
+print(coins)
 method = stdin.readline().strip()
 if method == "graadig" or (method == "velg" and canUseGreedy(coins)):
     for line in stdin:
-        # print("grådig")
+        #print("grådig")
         print(minCoinsGreedy(coins, int(line)))
 else:
     for line in stdin:
-        # print("Dynamic")
+        #print("Dynamic")
         print(minCoinsDynamic(coins, int(line)))
