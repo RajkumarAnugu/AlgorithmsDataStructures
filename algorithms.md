@@ -18,22 +18,64 @@
 
 Introduction to Algorithms
 ==
+I Foundations
+--
+2.1 Insertion sort
+--
+Insertion sort is like sort a hand of playing cards:
+- start with an empty hand
+- take one card each time
+- compare the card to the cards already in hand from right to left
+- then put it in the right place.
+
+| Algorithm         | Worst-case running time   | Average-case / expected running timea |
+| ---               | ---                       | ---                                   |
+| Insertion sort    | Θ(n^2)                    | Θ(n^2)                                | 
+
+2.3 Designing algorithms
+--
+**recursive** structure: 
+- solve problem by call themselves recursively to deal with closely related subproblems.
+
+**divide-and-conquer** approach:
+- recursive structure typically follow a divide-and-conquer approach.
+- which break the problem into several subproblems, solbe subproblems recursively, then combine solutions to create a solution to the original problem.
+    - **Divide** the problem into a number of subproblems that are smaller instances of the same problem.
+    - **Conquer** the subproblems by solving them recursively. If the subproblem sizes are small enough, however, just solve the subproblems in a straightforward manner.
+    - **Combine** the solutions to the subproblems into the solution for the original problem.
+
+#####Merge sort
+![Merge sort](algorithms/mergesort.png)
+
+- T(n) = Θ(1) if n ⩽ c
+- T(n) = aT(n/b) + D(n) +C(n) otherwise
+    - recursion tree has lg n+1 levels each costing cn
+    - total cost :
+        - cn(lg n + 1) = cn lg n + cn
+        - ignoring low-order term and constant c:
+            - **Θ(n lg n)**
+
+ 
+| Algorithm         | Worst-case running time   | Average-case / expected running timea |
+| ---               | ---                       | ---                                   |
+| merge sort        | Θ(n lg n)                 | Θ(n lg n)                             |
 
 II Sorting and Order Statistics
 --
+
 Insertion sort, merge sort, heapsort, and quicksort are all comparison sorts:
-    - they determine the sorted order of an input array by comparing elements.
-    - heapsort & merge sort are asymtotically optimal comparison sorts.
+- they determine the sorted order of an input array by comparing elements.
+- heapsort & merge sort are asymtotically optimal comparison sorts.
 
 | Algorithm         | Worst-case running time   | Average-case / expected running timea |
-| --- | --- | --- |
-| Insertion sort    | Θ(n^2)                    | Θ(n^2) |
-| merge sort        | Θ(n lg n)                 | Θ(n lg n) |
-| heapsort          | O(n lg n)                 | -
-| quicksort         | Θ(n^2)                    | Θ(n lg n) (expected)
-| Counting sort     | Θ(k + n)                  | Θ(k + n) | 
-| Radix sort        | Θ(d(n + k))               | Θ(d(n + k))
-| Bucket sort       | Θ(n^2)                    | Θ(n) (average-case)
+| ---               | ---                       | ---                                   |
+| Insertion sort    | Θ(n^2)                    | Θ(n^2)                                |
+| merge sort        | Θ(n lg n)                 | Θ(n lg n)                             |
+| heapsort          | O(n lg n)                 | -                                     |
+| quicksort         | Θ(n^2)                    | Θ(n lg n) (expected)                  |
+| Counting sort     | Θ(k + n)                  | Θ(k + n)                              | 
+| Radix sort        | Θ(d(n + k))               | Θ(d(n + k))                           |
+| Bucket sort       | Θ(n^2)                    | Θ(n) (average-case)                   |
 
 6 Heapsort
 --
