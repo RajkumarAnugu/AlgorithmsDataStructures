@@ -39,7 +39,7 @@ Insertion sort is like sort a hand of playing cards:
 
 **divide-and-conquer** approach:
 - recursive structure typically follow a divide-and-conquer approach.
-- which break the problem into several subproblems, solbe subproblems recursively, then combine solutions to create a solution to the original problem.
+- which break the problem into several subproblems, solve subproblems recursively, then combine solutions to create a solution to the original problem.
     - **Divide** the problem into a number of subproblems that are smaller instances of the same problem.
     - **Conquer** the subproblems by solving them recursively. If the subproblem sizes are small enough, however, just solve the subproblems in a straightforward manner.
     - **Combine** the solutions to the subproblems into the solution for the original problem.
@@ -48,10 +48,17 @@ Insertion sort is like sort a hand of playing cards:
 ![Merge sort](algorithms/mergesort.png)
 
 - T(n) = Θ(1) if n ⩽ c
+    - problem size n, if problem size is small enough say n ⩽ c
 - T(n) = aT(n/b) + D(n) +C(n) otherwise
-    - recursion tree has lg n+1 levels each costing cn
+    - a subproblems, each of which is 1/b the size of original.
+        - it takes time T(n/b) to solve one subproblem of size n/b
+            - so it takes time aT(n/b) to solve a of them.
+    - D(n) time to divide the problem into subproblems
+    - C(n) time to combine the solutions.
+
     - total cost :
         - cn(lg n + 1) = cn lg n + cn
+            - recursion tree has lg n+1 levels each costing cn
         - ignoring low-order term and constant c:
             - **Θ(n lg n)**
 
@@ -82,9 +89,92 @@ Insertion sort, merge sort, heapsort, and quicksort are all comparison sorts:
 
 6.1 Heaps
 --
+The (binary) heap data structure is an aray object that we can view as a nearly complete binary tree.
+- the tree is conpletely filled on all levels except possibly the lowest, which is filled from the left up to a point.
+- heap property:
+    - If A is a parent node of B then the key of node A is ordered with respect to the key of node B with the same ordering applying across the heap. 
+    - Either the keys of parent nodes are always greater than or equal to those of the children and the highest key is in the root node (this kind of heap is called **max heap**) 
+    - or the keys of parent nodes are less than or equal to those of the children and the lowest key is in the root node (**min heap**).
+
+![max heap](algorithms/maxheap.png)
+
+The max-heap property:
+- A[Parent(i)] ⩾ A[i]
+    - largest element is at the root.
+        - subtree rooted at a node contains values no larger than that contained at the node itself. 
+
+The min-heap property:
+- is opposite with max-heap
+    - the smallest element in a min-heap is at the root.
+- A[Parent(i)] ⩽ A[i]
+
+| Algorithm         | Worst-case running time   | Average-case / expected running timea |
+| ---               | ---                       | ---                                   |
+| heapsort          | O(n lg n)                 | -                                     |
+
+6.2 Maintaining the heap property
+--
+```Java
+    public static int[] maxHeapify(int[] A, int i) {
+        int l = left(i);
+        int r = right(i);
+        int largest;
+        if (l <= A.length - 1 && A[l] > A[i]) {
+            largest = l;
+        } else {
+            largest = i;
+        }
+        if (r <= A.length - 1 && A[r] > A[i]) {
+            largest = r;
+        }
+        if (largest != i) {
+            swap(A, i, largest);
+            maxHeapify(A, largest);
+        }
+        return A;
+    }
+```
+`
+run time:
+- subtree size n
+- cost Θ(1) to fix up the relationships
+- the children's subtrees each have size at most 2n/3
+- the worst case occurs when the bottom level of the tree is exactly half full.
+- T(n) ⩽ T(2n/3) + Θ(1)
+    - T(n) = O(lg n)
+        - size 2n/3 has max lg n levels which is runtime
+
+6.3 Building a heap
+--
+```Java
+    public static int[] buildMaxHeap(int[] A) {
+        for (int i = A.length; i > 0; i--) {
+            maxHeapify(A, i);
+        }
+        return A;
+    }
+```
+`
+run time:
+- build max heap cost O(n) call
+- maxHeapity each run O(lg n) time
+    - so building a heap cost **O(n lg n)**
 
 6.4 The heapsort algorithm
 --
+```Java
+    public static int[] heapsort(int[] A) {
+        A = buildMaxHeap(A);
+        for (int i = A.length; i < 1; i--) {
+            swap(A, 1, i);
+            maxHeapify(A, 1);
+        }
+        return A;
+    }
+```
+`
+run time:
+- **O(n lg n)**
 
 6.5 Priority queues
 --
