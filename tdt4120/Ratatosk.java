@@ -147,7 +147,7 @@ public class Ratatosk {
 	}
 
 	public static void velgFunction(Node rotNode) throws IOException {
-		System.out.println("write search method: dfs or bfs");
+		System.out.println("write treeSearch method: dfs or bfs");
 		// Scanner sc = new Scanner(System.in);
 		// String searchMethod = sc.nextLine();
 		// sc.close();
@@ -160,7 +160,7 @@ public class Ratatosk {
 		} else if (searchMethod.equalsIgnoreCase("bfs")) {
 			System.out.println("" + bfs(rotNode));
 		} else {
-			System.out.println("Can not do " + searchMethod + " search");
+			System.out.println("Can not do " + searchMethod + " treeSearch");
 		}
 	}
 }

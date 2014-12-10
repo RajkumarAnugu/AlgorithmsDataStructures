@@ -367,10 +367,17 @@ Bucket sort works as follows:
 
 9 Medians and Order Statistics
 --
+n - 1 comparisons are necessary to determine the minimum of n elements.
 
+find both minimum and maximum is at most 3⎿ n/2 ⏌ 
+- compare pairs of elements from the input first with each other, then compare the smaller with current minimum and larger with current maximum.
 
 III Data Structures
 --
+Diciionary:
+- supports:
+    - insert elements
+    - delete elements
 
 10 Elementary Data Structures
 --
@@ -402,20 +409,83 @@ n3:3
 11 Hash Tables
 --
 
+function|   Average     |    Worst case
+---     |---            |---
+Search  |O(1)           | O(n)
+Insert  |O(1)           | O(n)
+Delete  |O(1)           | O(n)
+
 11.2 Hash Tables
 --
+a hash table (hash map) is a data structure used to implement an associative array, a structure that can map keys to values. A hash table uses a hash function to compute an index into an array of buckets or slots, from which the correct value can be found.
 
 11.3 Hash functions
 --
+A good hash function and implementation algorithm are essential for good hash table performance, but may be difficult to achieve.
+
+A basic requirement is that the function should provide a uniform distribution of hash values. A non-uniform distribution increases the number of collisions and the cost of resolving them. Uniformity is sometimes difficult to ensure by design, but may be evaluated empirically using statistical tests
 
 12 Binary Search Trees
 --
+The search tree data structure supports many dynamic-set operations, including: 
+- SEARCH, 
+- MINIMUM, 
+- MAXIMUM, 
+- PREDECESSOR, 
+- SUCCESSOR, 
+- INSERT, and 
+- DELETE. 
+
+Thus, we can use a search tree both as a dictionary and as a priority queue
 
 12.1 What is a binary search tree?
 --
+a binary search tree (BST), sometimes also called an ordered or sorted binary tree, is a node-based binary tree data structure where each node has a comparable key (and an associated value)
+Binary search tree property:
+- Let x be a node in a binary search tree. 
+- If y is a node in the left subtree of x, then y.key >= x.key. 
+- If y is a node in the right subtree of x, then y.key <= x.key.
+- sorted by **inorder tree walk**
+
+![binary search tree](algorithms/binarysearchtree.png)
+
+inorder tree walk
+- subtree -> root -> subtree
+
+![inorder traversal](algorithms/inorder.png)
+
+preorder tree walk
+- root -> right subtree -> left subtree
+
+![preorder traversal](algorithms/preorder.png)
+
+postorder tree walk
+- right subtree -> left subtree -> root
+
+![postorder traversal](algorithms/postorder.png)
 
 12.2 Querying a binry search tree
 --
+```java
+    public Node treeSearch(Node x, Object k) {
+        if (x == null || k == x.data) {
+            return x;
+        }
+        if (x.data.compareTo(k) > 0) {
+            return treeSearch(x.left, k);
+        } else {
+            return treeSearch(x.right, k);
+        }
+    }
+```
+`
+binary search tree height h >= ⎿ lg n ⏌
+
+function|   Average     |    Worst case
+---     |---            |---
+Search  |O(lg n)        | O(n)
+Insert  |O(lg n)        | O(n)
+Delete  |O(lg n)        | O(n)
 
 
 IV Advanced Design and Analysis Techniques
@@ -423,15 +493,71 @@ IV Advanced Design and Analysis Techniques
 
 15 Dynamic Programming
 --
+In mathematics, computer science, economics, and bioinformatics, **dynamic programming** 
+- is a method for solving a complex problems by breaking it down into a collection of simpler subproblems. 
+- It is applicable to problems exhibiting the properties of overlapping subproblems and optimal substructure. 
+- When applicable, the method takes far less time than naive methods that don't take advantage of the subproblem overlap (like depth-first search).
+- In order to solve a given problem, using a dynamic programming approach, we need to solve different parts of the problem (subproblems), then combine the solutions of the subproblems to reach an overall solution.
 
+There are two key attributes that a problem must have in order for dynamic programming to be applicable: 
+- optimal substructure and overlapping subproblems. 
+- If a problem can be solved by combining optimal solutions to non-overlapping subproblems, the strategy is called "divide and conquer" instead. 
+- This is why mergesort and quicksort are not classified as dynamic programming problems.
+
+When developing a dynamic-programming algorithm, we follow a sequence of four steps:
+1. Characterize the structure of an optimal solution.
+2. Recursively define the value of an optimal solution.
+3. Compute the value of an optimal solution, typically in a bottom-up fashion. 
+4. Construct an optimal solution from computed information.
 
 16 Greedy Algorithms
 --
+Always makes the choice that looks best at the moment.
+- find optimal choice locally 
+    - hope it will lead to a globally optimal solution.
 
+In general, greedy algorithms have five components:
+1. A candidate set, from which a solution is created
+2. A selection function, which chooses the best candidate to be added to the solution
+3. A feasibility function, that is used to determine if a candidate can be used to contribute to a solution
+4. An objective function, which assigns a value to a solution, or a partial solution, and
+5. A solution function, which will indicate when we have discovered a complete solution
 
 16.3 Huffman codes
 --
+Huffman codes compress data very effectively: savings of 20% to 90% are typical, depending on the characteristics of the data being compressed. We consider the data to be a sequence of characters. Huffman’s greedy algorithm uses a table giving how often each character occurs (i.e., its frequency) to build up an optimal way of representing each character as a binary string.
 
+```java
+    /**
+     * Constructs a Huffman tree from given character frequencies.
+     * 
+     * @param frequencies
+     *            a map whose keys are the characters to be encoded
+     *            and whose values are the frequencies of the characters
+     */
+    public HuffmanTree(Map<Character, Integer> frequencies) {
+        PriorityQueue<Node> nodes = new PriorityQueue<Node>();
+        for (char ch : frequencies.keySet()) {
+            Node newNode = new Node();
+            newNode.character = ch;
+            newNode.frequency = frequencies.get(ch);
+            nodes.add(newNode);
+        }
+        while (nodes.size() > 1) {//reduce queue to node set last node to root
+            Node smallest = nodes.remove();//remove the head of this queue
+            Node nextSmallest = nodes.remove();
+            Node newNode = new Node();
+            newNode.frequency = smallest.frequency + nextSmallest.frequency;
+            newNode.left = smallest;
+            newNode.right = nextSmallest;
+            nodes.add(newNode);
+        }
+        root = nodes.remove();
+    }
+```
+`
+
+[Huffman Tree](dataStructures/HuffmanTree.md)
 
 VI Graph Algorithms
 --

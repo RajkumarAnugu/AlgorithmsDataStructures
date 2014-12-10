@@ -10,10 +10,10 @@ public class LinearSearch {
 		for (int i = 0; i < a.length; i++) {
 			nr=i;
 			if(a[i]==value){
-				System.out.println("search in array:"+"\n"+Arrays.toString(a)+"\n"+"array length: "+a.length+"\n"+"search value: "+value+"\n"+"search times:"+nr);
+				System.out.println("treeSearch in array:"+"\n"+Arrays.toString(a)+"\n"+"array length: "+a.length+"\n"+"treeSearch value: "+value+"\n"+"treeSearch times:"+nr);
 				return i;}
 		}
-		System.out.println("search array:"+"\n"+Arrays.toString(a)+"\n"+"search value: "+value+"\n"+"search times:"+nr);
+		System.out.println("treeSearch array:"+"\n"+Arrays.toString(a)+"\n"+"treeSearch value: "+value+"\n"+"treeSearch times:"+nr);
 		return -1;
 	}
 	
@@ -24,7 +24,7 @@ public class LinearSearch {
 		Scanner in = new Scanner(System.in);
 		boolean done=false;
 		while(!done){
-			System.out.println("Enter search number: (-1 to quit!)");
+			System.out.println("Enter treeSearch number: (-1 to quit!)");
 			int n= in.nextInt();
 			if(n==-1){
 				done=true;

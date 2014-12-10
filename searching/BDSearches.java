@@ -11,7 +11,7 @@ import dataStructures.Tree.Node;
  * 21. jul. 2014
  * 
  * @author GuoJunjun
- *         Breadth First search
+ *         Breadth First treeSearch
  *         &
  *         Depth First Search
  *

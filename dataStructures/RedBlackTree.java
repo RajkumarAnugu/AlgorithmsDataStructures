@@ -5,9 +5,9 @@ package dataStructures;
  * 22. jul. 2014
  * 
  *
- * insertion and removal in a binary search tree are O(log(n)) operations
+ * insertion and removal in a binary treeSearch tree are O(log(n)) operations
  * provided that the tree is balanced. In red-black trees, a special kind of
- * binary search tree that rebalances itself after each insertion or removal.
+ * binary treeSearch tree that rebalances itself after each insertion or removal.
  * With red-black trees, we can guarantee efficiency of these operations. In
  * fact, the Java Collections framework uses red-black trees to implement tree
  * sets and tree maps.

@@ -16,10 +16,10 @@ public class BinarySearch {
 		if (low <= high) {
 			int mid = (low + high) / 2;
 			if (value == a[mid]) {
-				System.out.println("search in array:" + "\n"
+				System.out.println("treeSearch in array:" + "\n"
 						+ Arrays.toString(a) + "\n" + "array length: "
-						+ a.length + "\n" + "search value: " + value + "\n"
-						+ "search times:" + nr);
+						+ a.length + "\n" + "treeSearch value: " + value + "\n"
+						+ "treeSearch times:" + nr);
 				return mid;
 			} else if (value > a[mid]) {
 				return search(a, mid + 1, high, value);
@@ -38,7 +38,7 @@ public class BinarySearch {
 		Scanner in = new Scanner(System.in);
 		boolean done = false;
 		while (!done) {
-			System.out.println("Enter search number: (-1 to quit!)");
+			System.out.println("Enter treeSearch number: (-1 to quit!)");
 			int n = in.nextInt();
 			if (n == -1) {
 				done = true;
