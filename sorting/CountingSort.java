@@ -57,7 +57,7 @@ public class CountingSort {
         //            C[i] = 0;
         //        }
         for (int j = 0; j < A.length; j++) {
-            C[A[j]] += 1;
+            C[A[j]] += 1;// total number of this values
         }
         ps += "C1     :" + toString(C) + "\n";
         for (int i = 1; i < k; i++) {
@@ -66,9 +66,9 @@ public class CountingSort {
         ps += "C2     :" + toString(C) + "\n";
         for (int j = A.length - 1; j >= 0; j--) {
             B[C[A[j]] - 1] = A[j];
-            ps += "B-"+String.format("%-5d",(A.length-j))+":" + toString(B) + "\n";
+            ps += "B-" + String.format("%-5d", (A.length - j)) + ":" + toString(B) + "\n";
             C[A[j]] -= 1;
-            ps += "C-"+String.format("%-5d",(A.length-j)+2)+":" + toString(C) + "\n";
+            ps += "C-" + String.format("%-5d", (A.length - j) + 2) + ":" + toString(C) + "\n";
         }
         return B;
     }

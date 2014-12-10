@@ -286,7 +286,8 @@ the sorted order they determine is based only on comparisons between the input e
 sorting a collection of objects according to keys that are small integers; 
 - that is, it is an integer sorting algorithm. 
 - It operates by counting the number of objects that have each distinct key value, and using arithmetic on those counts to determine the positions of each key value in the output sequence. 
-- Its running time is linear in the number of items and the difference between the maximum and minimum key values, so it is only suitable for direct use in situations where the variation in keys is not significantly greater than the number of items.
+- Its running time is linear in the number of items and the difference between the maximum and minimum key values, 
+    - so it is **only suitable for** direct use in situations where the variation in **keys is not significantly greater than the number of items**.
 
 ```java
     /**
@@ -342,9 +343,27 @@ C-10   :   0   2   2   4   7   7
 
 8.3 Radix sort
 --
+- radix sort is a non-comparative integer sorting algorithm that sorts data with integer keys by grouping keys by the individual digits which share the same significant position and value. 
+- A positional notation is required, but because integers can represent strings of characters (e.g., names or dates) and specially formatted floating point numbers, radix sort is not limited to integers.
+- Θ(d(n + k)) time if the stable sort uses Θ(n + k)
+
 
 8.4 Bucket sort
 --
+Bucket sort, or bin sort, is a sorting algorithm that works by partitioning an array into a number of buckets. 
+- Each bucket is then sorted individually, either using a different sorting algorithm, or by recursively applying the bucket sorting algorithm. 
+- It is a distribution sort, and is a cousin of radix sort in the most to least significant digit flavour. 
+- Bucket sort is a generalization of pigeonhole sort. 
+- Bucket sort can be implemented with comparisons and therefore can also be considered a comparison sort algorithm.
+    - worest-case: **Θ(n^2)**  
+    - **Θ(n)** (average-case)
+
+Bucket sort works as follows:
+- Set up an array of initially empty "buckets".
+- Scatter: Go over the original array, putting each object in its bucket.
+- Sort each non-empty bucket.
+- Gather: Visit the buckets in order and put all elements back into the original array.
+
 
 9 Medians and Order Statistics
 --
