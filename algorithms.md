@@ -275,9 +275,70 @@ best-case partitioning:
 
 8 Sorting in Linear Time
 --
+#####Comparison sorts:
+the sorted order they determine is based only on comparisons between the input elements.
+- property:
+    - an comparison sort must make **Ω(n lg n)** comparisons in the **worst case** to sort n elements
+
 
 8.2 Counting sort
 --
+sorting a collection of objects according to keys that are small integers; 
+- that is, it is an integer sorting algorithm. 
+- It operates by counting the number of objects that have each distinct key value, and using arithmetic on those counts to determine the positions of each key value in the output sequence. 
+- Its running time is linear in the number of items and the difference between the maximum and minimum key values, so it is only suitable for direct use in situations where the variation in keys is not significantly greater than the number of items.
+
+```java
+    /**
+     * @param A
+     *         input is an array A
+     * @param B
+     *         hold for the sorted output
+     * @param k
+     *         k >= the max element in A
+     *
+     * @return
+     */
+    public static int[] sort(int[] A, int[] B, int k) {
+        int[] C = new int[k];
+        for (int j = 0; j < A.length; j++) {
+            C[A[j]] += 1;
+        }
+        for (int i = 1; i < k; i++) {
+            C[i] = C[i] + C[i - 1];
+        }
+        for (int j = A.length - 1; j >= 0; j--) {
+            B[C[A[j]] - 1] = A[j];
+            C[A[j]] -= 1;
+        }
+        return B;
+    }
+
+--
+input A:   2   5   3   0   2   3   0   3
+holderB:   0   0   0   0   0   0   0   0
+C      :   0   0   0   0   0   0
+C1     :   2   0   2   3   0   1
+C2     :   2   2   4   7   7   8
+B-1    :   0   0   0   0   0   0   3   0
+C-3    :   2   2   4   6   7   8
+B-2    :   0   0   0   0   0   0   3   0
+C-4    :   1   2   4   6   7   8
+B-3    :   0   0   0   0   0   3   3   0
+C-5    :   1   2   4   5   7   8
+B-4    :   0   0   0   2   0   3   3   0
+C-6    :   1   2   3   5   7   8
+B-5    :   0   0   0   2   0   3   3   0
+C-7    :   0   2   3   5   7   8
+B-6    :   0   0   0   2   3   3   3   0
+C-8    :   0   2   3   4   7   8
+B-7    :   0   0   0   2   3   3   3   5
+C-9    :   0   2   3   4   7   7
+B-8    :   0   0   2   2   3   3   3   5
+C-10   :   0   2   2   4   7   7
+           0   0   2   2   3   3   3   5
+```
+`
 
 8.3 Radix sort
 --
