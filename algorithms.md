@@ -156,8 +156,8 @@ run time:
 ```
 `
 run time:
-- build max heap cost O(n) call
-- maxHeapity each run O(lg n) time
+- build max heap cost O(n) times to call
+- maxHeapity, each maxHeapilty run O(lg n) times
     - so building a heap cost **O(n lg n)**
 
 6.4 The heapsort algorithm
@@ -178,12 +178,100 @@ run time:
 
 6.5 Priority queues
 --
+A **priority queue** 
+- is a data structure for maintaining a set S of elements, each with an associated value called key. 
+- is an abstract data type which is like a regular queue or stack data structure, but where additionally each element has a "priority" associated with it. In a priority queue, an element with high priority is served before an element with low priority. If two elements have the same priority, they are served according to their order in the queue. <wikipedia>
+- While priority queues are often implemented with heaps, they are conceptually distinct from heaps. A priority queue is an abstract concept like "a list" or "a map"; just as a list can be implemented with a linked list or an array, a priority queue can be implemented with a heap or a variety of other methods such as an unordered array. <wikipedia>
+- A max-priority queue supports :
+    
+    - INSERT (S, x) inserts the element x into the set S, which is equivalent to the operation S = S ⋃ {x}.
+    - MAXIMUM(S) returns the element of S with the largest key.
+    - EXTRACT-MAX (S) removes and returns the element of S with the largest key.
+    - INCREASE-KEY (S, x, k) increases the value of element x’s key to the new value k, which is assumed to be at least as large as x’s current key value.
+
 
 7 Quicksort
 --
+| Algorithm         | Worst-case running time   | Average-case / expected running timea |
+| ---               | ---                       | ---                                   |
+| quicksort         | Θ(n^2)                    | Θ(n lg n) (expected)                  |
+
+quicksort is often the best parctical choice for sorting
+- efficient on the average
+- is often faster in practice than other O(n log n) algorithms.
+
+```Java
+    public static void sort(int[] a, int from, int to) {
+        if (from >= to) {
+            return;
+        }
+        int p = partition(a, from, to);
+        sort(a, from, p - 1);
+        sort(a, p + 1, to);
+    }
+
+    public static int partitioning(int[] A, int p, int r) {
+        int x = A[r];
+        int i = p - 1;
+        for (int j = p; j < r; j++) {
+            if (A[j] <= x) {
+                i++;
+                swap(A, i, j);
+            }
+        }
+        swap(A, i + 1, r);
+        return i + 1;
+    }
+
+// result:
+array: 2, 8, 7, 1, 3, 5, 6, 4, 
+swap : 2, 8, 7, 1, 3, 5, 6, 4, 
+swap : 2, 1, 7, 8, 3, 5, 6, 4, 
+swap : 2, 1, 3, 8, 7, 5, 6, 4, 
+swap : 2, 1, 3, 4, 7, 5, 6, 8, 
+swap : 2, 1, 3, 4, 7, 5, 6, 8, 
+swap : 2, 1, 3, 4, 7, 5, 6, 8, 
+swap : 2, 1, 3, 4, 7, 5, 6, 8, 
+swap : 1, 2, 3, 4, 7, 5, 6, 8, 
+a    : 1, 2, 3, 4, 7, 5, 6, 8,   p: 0
+a    : 1, 2, 3, 4, 7, 5, 6, 8,   p: 2
+swap : 1, 2, 3, 4, 7, 5, 6, 8, 
+swap : 1, 2, 3, 4, 7, 5, 6, 8, 
+swap : 1, 2, 3, 4, 7, 5, 6, 8, 
+swap : 1, 2, 3, 4, 7, 5, 6, 8, 
+swap : 1, 2, 3, 4, 5, 7, 6, 8, 
+swap : 1, 2, 3, 4, 5, 6, 7, 8, 
+a    : 1, 2, 3, 4, 5, 6, 7, 8,   p: 5
+a    : 1, 2, 3, 4, 5, 6, 7, 8,   p: 7
+a    : 1, 2, 3, 4, 5, 6, 7, 8,   p: 3
+       1, 2, 3, 4, 5, 6, 7, 8, 
+
+```
+`
+![quick sort](algorithms/quicksort.png)
 
 7.4 Analysis of quicksort
 --
+worst-case partitioning:
+```java
+    int[] A = {9, 8, 7, 6, 5, 4, 3, 2, 1};
+    public static int partitioning(int[] A, int p, int r) {
+        int x = A[r];
+        ...
+```
+`
+- run time:
+    - partitioning costs Θ(n) time
+    - one recursive call (array size 0) cost T (0) = Θ(1)
+    - the other recursive call cost T(n-1)
+    - T(n) = T(n-1) + T(0) + Θ(n)
+        - T(n) = T(n-1) + Θ(n)
+            - **T(n) = Θ(n^2)**
+
+best-case partitioning:
+- if each of the subproblems size are no more than n/2
+- T(n) = 2T(n/2) + Θ(n)
+    - **T(n) = Θ(n lg n)**
 
 8 Sorting in Linear Time
 --

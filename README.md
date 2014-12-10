@@ -3,6 +3,7 @@ Algorithms and data structures
 
 TDT4120 Algoritmer og datastrukurer (Algorithms and data structures)
 --
+[Algorithms md (summary)](algorithms.md)
 
 [Data structures md](dataStructures/README.md)
 
