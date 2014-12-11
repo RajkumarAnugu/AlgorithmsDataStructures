@@ -706,6 +706,7 @@ relaxing an edge(u, v)
 
 24.1 The Bellman-Ford algorithm
 --
+
 The Bellman-Ford algorithm solves the single-source shortest-paths problem in the general case in which edge weights may be negative.
 - The algorithm relaxes edges, progressively decreasing an estimate v.d on the weight of a shortest path from the source s to each vertex v ∈ V until it achieves the actual shortest-path weight 𝜹(s.v) 
 - The algorithm returns TRUE if and only if the graph contains no negative-weight cycles that are reachable from the source.
@@ -721,7 +722,9 @@ BELLMAN-FORD(G, w, s):
             return False
     return True
 ```
+
 run time : **O(VE)**
+
 
 24.3 Dijkstra's algorithm
 --
@@ -729,6 +732,7 @@ run time : **O(VE)**
 Dijkstra’s algorithm solves the single-source shortest-paths problem on a weighted, directed graph G = (V, E) for the case in which all edge weights are nonnegative.
 - Dijkstra’s algorithm maintains a set S of vertices whose final shortest-path weights from the source s have already been determined. 
 - The algorithm repeatedly selects the vertex u ∈ V - S with the minimum shortest-path estimate, adds u to S, and relaxes all edges leaving u. 
+
 
 ```java
     /**
@@ -760,10 +764,12 @@ Dijkstra’s algorithm solves the single-source shortest-paths problem on a weig
             }
         }
         return S;
-    }                                                                                                                                                                                                                       }
+    }
 ```
+
 25 All-Pairs Shortest Paths
 --
+
 We can solve an all-pairs shortest-paths problem by running a single-source shortest-paths algorithm |V|  times, once for each vertex as the source. 
 - If all edge weights are nonnegative, we can use Dijkstra’s algorithm. 
 - If we use the linear-array implementation of the min-priority queue, the running time is O(V^3 + VE) = O(V^3) 
@@ -789,6 +795,8 @@ VII Selected Topics
 
 34 NP-Completeness
 --
+
 In computational complexity theory, a decision problem is NP-complete when it is both in NP and NP-hard. The set of NP-complete problems is often denoted by NP-C or NPC. The abbreviation NP refers to "nondeterministic polynomial time".
+
 ![](algorithms/p_np_npc.png)
 
