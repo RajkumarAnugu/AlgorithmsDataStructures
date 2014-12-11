@@ -13,11 +13,11 @@ import java.util.Set;
  */
 public class SingleSourceShortestPath {
     /**
-     * The bellman Ford algorithm returns a boolean value indicating whether or not there is a negative-weight cycle
-     * that is reachable from the source ...
+     * The bellman Ford algorithm returns a boolean value indicating whether or not there is a
+     * negative-weight cycle that is reachable from the source ...
      * <p/>
-     * The Bellman–Ford algorithm is an algorithm that computes shortest paths from a single source vertex to all of the
-     * other vertices in a weighted digraph.
+     * The Bellman–Ford algorithm is an algorithm that computes shortest paths from a single source
+     * vertex to all of the other vertices in a weighted digraph.
      * <p/>
      * The Bellman-Ford algorithm runs in time O(VE)
      * <p/>
@@ -92,8 +92,9 @@ public class SingleSourceShortestPath {
     /**
      * Dijkstra's algorithm
      * <p/>
-     * solves the single-source shortest path problem for a graph with non-negative edge path costs, producing a
-     * shortest path tree. This algorithm is often used in routing and as a subroutine in other graph algorithms.
+     * solves the single-source shortest path problem for a graph with non-negative edge path costs,
+     * producing a shortest path tree. This algorithm is often used in routing and as a subroutine
+     * in other graph algorithms.
      * <p/>
      * Worst case run time: O ( E + V * log V )
      *
@@ -108,10 +109,10 @@ public class SingleSourceShortestPath {
         for (Node node : G.getV()) {
             Q.add(node);
         }
-        while (Q.size() != 0) {                                 // run time V
-            Node u = Q.poll();//return the smallest u.weight
-            S.add(u);                                           // worst case log V (for (Node v : G.getAdjacency(u)))
-            for (Node v : G.getAdjacency(u)) {                  // run time (getAdjacency = E) E + V * log V
+        while (Q.size() != 0) {               // run time V
+            Node u = Q.poll();                // return the smallest u.weight
+            S.add(u);                         // worst case log V (for (Node v : G.getAdjacency(u)))
+            for (Node v : G.getAdjacency(u)) {// run time (getAdjacency = E) E + V * log V
                 int w = G.getWeight(u.getValue(), v.getValue());
                 relax(u, v, w);
             }

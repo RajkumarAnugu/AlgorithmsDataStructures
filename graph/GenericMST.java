@@ -9,7 +9,7 @@ import java.util.Set;
 
 /**
  * Introduction to Algorithms Third Edition
- * Page 627: 23.1 Growing a minimum spanning tree
+ * 23.1 Growing a minimum spanning tree
  * to Java code
  * 
  * @author GuoJunjun

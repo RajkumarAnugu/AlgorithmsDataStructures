@@ -58,7 +58,7 @@ Insertion sort is like sort a hand of playing cards:
 
     - total cost :
         - cn(lg n + 1) = cn lg n + cn
-            - recursion tree has lg n+1 levels each costing cn
+            - **recursion tree has lg n+1 levels** each costing cn
         - ignoring low-order term and constant c:
             - **Θ(n lg n)**
 
@@ -134,7 +134,7 @@ The min-heap property:
         return A;
     }
 ```
-`
+
 run time:
 - subtree size n
 - cost Θ(1) to fix up the relationships
@@ -154,7 +154,7 @@ run time:
         return A;
     }
 ```
-`
+
 run time:
 - build max heap cost O(n) times to call
 - maxHeapity, each maxHeapilty run O(lg n) times
@@ -172,7 +172,7 @@ run time:
         return A;
     }
 ```
-`
+
 run time:
 - **O(n lg n)**
 
@@ -181,9 +181,10 @@ run time:
 A **priority queue** 
 - is a data structure for maintaining a set S of elements, each with an associated value called key. 
 - is an abstract data type which is like a regular queue or stack data structure, but where additionally each element has a "priority" associated with it. In a priority queue, an element with high priority is served before an element with low priority. If two elements have the same priority, they are served according to their order in the queue. <wikipedia>
-- While priority queues are often implemented with heaps, they are conceptually distinct from heaps. A priority queue is an abstract concept like "a list" or "a map"; just as a list can be implemented with a linked list or an array, a priority queue can be implemented with a heap or a variety of other methods such as an unordered array. <wikipedia>
+- While priority queues are often implemented with heaps, they are conceptually distinct from heaps. 
+- A priority queue is an abstract concept like "a list" or "a map"; just as a list can be implemented with a linked list or an array, a priority queue can be implemented with a heap or a variety of other methods such as an unordered array. <wikipedia>
+
 - A max-priority queue supports :
-    
     - INSERT (S, x) inserts the element x into the set S, which is equivalent to the operation S = S ⋃ {x}.
     - MAXIMUM(S) returns the element of S with the largest key.
     - EXTRACT-MAX (S) removes and returns the element of S with the largest key.
@@ -247,7 +248,7 @@ a    : 1, 2, 3, 4, 5, 6, 7, 8,   p: 3
        1, 2, 3, 4, 5, 6, 7, 8, 
 
 ```
-`
+
 ![quick sort](algorithms/quicksort.png)
 
 7.4 Analysis of quicksort
@@ -259,7 +260,7 @@ worst-case partitioning:
         int x = A[r];
         ...
 ```
-`
+
 - run time:
     - partitioning costs Θ(n) time
     - one recursive call (array size 0) cost T (0) = Θ(1)
@@ -339,7 +340,7 @@ B-8    :   0   0   2   2   3   3   3   5
 C-10   :   0   2   2   4   7   7
            0   0   2   2   3   3   3   5
 ```
-`
+
 
 8.3 Radix sort
 --
@@ -374,13 +375,28 @@ find both minimum and maximum is at most 3⎿ n/2 ⏌
 
 III Data Structures
 --
-Diciionary:
+Dictionary:
 - supports:
     - insert elements
     - delete elements
 
 10 Elementary Data Structures
 --
+10.1 Stacks and queues
+--
+#####stacks
+- last-in, first-out
+- Insert operation on a stack is often called **push**
+- Delete operation, does not take an elemet argument, often called **Pop**
+    - operation push & pop each cost O(1) time
+
+#####queues
+- first-in, last-out
+- Insert operation on a queue is often called **Enqueue**
+- Delete is called **Dequeue**
+- the queue has a **head** and **tail** 
+    - when an element is enqueued, it takes place at the tail.
+
 
 10.2 Linked lists
 --
@@ -405,7 +421,9 @@ n1:1
 n2:2
 n3:3
 ```
-`
+
+search procedure takes Θ(n) time in the worst case (search entire list).
+
 11 Hash Tables
 --
 
@@ -437,6 +455,7 @@ The search tree data structure supports many dynamic-set operations, including:
 - DELETE. 
 
 Thus, we can use a search tree both as a dictionary and as a priority queue
+
 
 12.1 What is a binary search tree?
 --
@@ -478,7 +497,7 @@ postorder tree walk
         }
     }
 ```
-`
+
 binary search tree height h >= ⎿ lg n ⏌
 
 function|   Average     |    Worst case
@@ -487,13 +506,14 @@ Search  |O(lg n)        | O(n)
 Insert  |O(lg n)        | O(n)
 Delete  |O(lg n)        | O(n)
 
+[Binary Search Tree](dataStructures/binarySearchTree.md)
 
 IV Advanced Design and Analysis Techniques
 --
 
 15 Dynamic Programming
 --
-In mathematics, computer science, economics, and bioinformatics, **dynamic programming** 
+In mathematics, computer science, economics, and bioinformatics, **dynamic programming** :
 - is a method for solving a complex problems by breaking it down into a collection of simpler subproblems. 
 - It is applicable to problems exhibiting the properties of overlapping subproblems and optimal substructure. 
 - When applicable, the method takes far less time than naive methods that don't take advantage of the subproblem overlap (like depth-first search).
@@ -505,10 +525,10 @@ There are two key attributes that a problem must have in order for dynamic progr
 - This is why mergesort and quicksort are not classified as dynamic programming problems.
 
 When developing a dynamic-programming algorithm, we follow a sequence of four steps:
-1. Characterize the structure of an optimal solution.
-2. Recursively define the value of an optimal solution.
-3. Compute the value of an optimal solution, typically in a bottom-up fashion. 
-4. Construct an optimal solution from computed information.
+- Characterize the structure of an optimal solution.
+- Recursively define the value of an optimal solution.
+- Compute the value of an optimal solution, typically in a bottom-up fashion. 
+- Construct an optimal solution from computed information.
 
 16 Greedy Algorithms
 --
@@ -517,11 +537,11 @@ Always makes the choice that looks best at the moment.
     - hope it will lead to a globally optimal solution.
 
 In general, greedy algorithms have five components:
-1. A candidate set, from which a solution is created
-2. A selection function, which chooses the best candidate to be added to the solution
-3. A feasibility function, that is used to determine if a candidate can be used to contribute to a solution
-4. An objective function, which assigns a value to a solution, or a partial solution, and
-5. A solution function, which will indicate when we have discovered a complete solution
+- A candidate set, from which a solution is created
+- A selection function, which chooses the best candidate to be added to the solution
+- A feasibility function, that is used to determine if a candidate can be used to contribute to a solution
+- An objective function, which assigns a value to a solution, or a partial solution, and
+- A solution function, which will indicate when we have discovered a complete solution
 
 16.3 Huffman codes
 --
@@ -555,45 +575,203 @@ Huffman codes compress data very effectively: savings of 20% to 90% are typical,
         root = nodes.remove();
     }
 ```
-`
+
 
 [Huffman Tree](dataStructures/HuffmanTree.md)
 
 VI Graph Algorithms
 --
 
+graph G = (V, E)
+- vertices V
+- edges    E
+
 22 Elementary Graph Algorithms
 --
+Two standard ways to represent graph G = (V, E)
+1. adjacency lists
+2. adjacency matrix
+
+    - both applies:
+        - directed and undirected graphs
+
+Weighted graph:
+- each edge has an associated weight
+    - typically given by a weight function 
 
 
 22.2 Breadth-first search
 --
+Prim’s minimum-spanning- tree algorithm and Dijkstra’s single-source shortest-paths algorithm use ideas similar to those in breadth-first search.
+
+Given a graph G = (V, E) and a distinguished source vertex s, breadth-first search systematically explores the edges of G to “discover” every vertex that is reachable from s.
+
+total time spent in scanning adjacency lists is O(E).
+- worst case searching O(E)
+- The overhead for initialization is O(V), 
+- and thus the total running time of the BFS procedure is **O(V + E)**.
+
 
 22.3 Depth-first search
 --
+[BFS & DFS](searching/README.md)
+
+DFS running time : **Θ(V + E)**
 
 22.4 Topological sort
 --
+dag: directed acyclic graph.
 
+**topological sort** (sometimes abbreviated topsort or toposort) or topological ordering of a directed graph :
+- is a linear ordering of its vertices such that for every directed edge uv from vertex u to vertex v, u comes before v in the ordering. 
+    - For instance, the vertices of the graph may represent tasks to be performed, and the edges may represent constraints that one task must be performed before another; 
+        - in this application, a topological ordering is just a valid sequence for the tasks. 
+- A topological ordering is possible if and only if the graph has no directed cycles, that is, if it is a directed acyclic graph (DAG). Any DAG has at least one topological ordering, 
+    - and algorithms are known for constructing a topological ordering of any DAG in linear time.
+- can use depth-first search to perform a topological sort
+    - runtime: same with DFS: **Θ(V + E)**
+
+![dag](algorithms/dag.png)
+
+valid topological sorts for the DAG graph:
+- 7, 5, 3, 11, 8, 2, 9, 10 (visual left-to-right, top-to-bottom)
+- 3, 5, 7, 8, 11, 2, 9, 10 (smallest-numbered available vertex first)
+- 5, 7, 3, 8, 11, 10, 9, 2 (fewest edges first)
+- 7, 5, 11, 3, 10, 8, 9, 2 (largest-numbered available vertex first)
+- 7, 5, 11, 2, 3, 8, 9, 10 (attempting top-to-bottom, left-to-right)
+- 3, 7, 8, 5, 11, 10, 2, 9 (arbitrary)
 
 23 Minimum Spanning Trees
 --
+Given a connected, undirected graph, **a spanning tree** of that graph is a subgraph that is a tree and connects all the vertices together. 
+- A single graph can have many different spanning trees. 
+- We can also assign a weight to each edge, which is a number representing how unfavorable it is, and use this to assign a weight to a spanning tree by computing the sum of the weights of the edges in that spanning tree. 
+- **A minimum spanning tree** (MST) or minimum weight spanning tree is then a spanning tree with weight less than or equal to the weight of every other spanning tree. 
+    - More generally, any undirected graph (not necessarily connected) has a minimum spanning forest, which is a union of minimum spanning trees for its connected components.
+
+```
+Generic-MST(G, w):
+    A = None
+    while (A does not form a spanning tree):
+        find an edge (u, v) that is safe for A
+        A = A U {(u, v)}
+    return A
+```
+- find an edge (u, v) that is safe for A:
+    - any cut of G (u1, v1) respets to A
+    - find light edge (u, v) 
+- add (u, v) to A
+- repeat until A form a spanning tree
 
 23.2 The algorithms of Kruskal and Prim
 --
+#####Kruskal's algorithm
+- the set A is a forest whose vertices are all those of the given graph.
+- the safe edge added to A is always a least-weight edge in the graph that connects two distinct components.
+- finds a safe edge to add to the growing forest by finding, of all the edges that connect any two trees in the forest of least weight(greedy algorithm).
+- running time: **O(E lg V)**
+
+#####Prim's algorithm
+- the set A forms a single tree.
+- the safe edge added to A is always a least-weight edge connecting the tree to a vertex not in the tree.
+- the tree start from an arbitrary root vertex r and grows until the tree spans all the vertices in V.
+    - each step adds to the tree A a light edge(greedy strategy) that connects A to an isolated vertex
+        - -- one on which no edge of A is incident.
+- run time: **O(E lg V)**
+
 
 24 Single-Source Shortest Paths
 --
+lemma 24.1 **subpaths of shortest paths are shortest paths**
+
+- greedy algorithm: **Dijkstra**
+- dynamic-programming: **Floyd-Warshall algorithm**
+
+Negative edge:
+- Dijkstra's algorithm assume all edge weights are nonnegative
+- Bellman-Ford algorithm allow negative-weight edges.
+
+Cycles:
+- shortest path can not contain cycle!
+
+```
+relax(u, v, w):
+    if v.d > u.d + w(u, v)
+        v.d = u.d + w(u, v)
+        v.pi = u
+```
+relaxing an edge(u, v)
+- testing whether we can improve the shortest 
+    - updating v.d and v.pi
 
 24.1 The Bellman-Ford algorithm
 --
+The Bellman-Ford algorithm solves the single-source shortest-paths problem in the general case in which edge weights may be negative.
+- The algorithm relaxes edges, progressively decreasing an estimate v.d on the weight of a shortest path from the source s to each vertex v ∈ V until it achieves the actual shortest-path weight 𝜹(s.v) 
+- The algorithm returns TRUE if and only if the graph contains no negative-weight cycles that are reachable from the source.
 
+```
+BELLMAN-FORD(G, w, s):
+    INITIALIZE-SINGLE-SOURCE (G, s)
+    for i = 1 to G.V - 1
+        for each edge (u, v) ∈ G.E
+        RELAX(u, v, w)
+    for each edge (u, v) ∈ G.E
+        if v.d > u.d + w(u, v)
+            return False
+    return True
+```
+run time : **O(VE)**
 
 24.3 Dijkstra's algorithm
 --
 
+Dijkstra’s algorithm solves the single-source shortest-paths problem on a weighted, directed graph G = (V, E) for the case in which all edge weights are nonnegative.
+- Dijkstra’s algorithm maintains a set S of vertices whose final shortest-path weights from the source s have already been determined. 
+- The algorithm repeatedly selects the vertex u ∈ V - S with the minimum shortest-path estimate, adds u to S, and relaxes all edges leaving u. 
+
+```java
+    /**
+     * Dijkstra's algorithm
+     * <p/>
+     * solves the single-source shortest path problem for a graph with non-negative edge path costs,
+     * producing a shortest path tree. This algorithm is often used in routing and as a subroutine
+     * in other graph algorithms.
+     * <p/>
+     * Worst case run time: O ( E + V * log V )
+     *
+     * @param G
+     *         {@link graph.G}
+     */
+    public static Set<Node> Dijkstra(G G) {
+        int s = 1;
+        initializeSingleSource(G, s);
+        Set<Node> S = new HashSet<Node>();
+        PriorityQueue<Node> Q = new PriorityQueue<Node>();
+        for (Node node : G.getV()) {
+            Q.add(node);
+        }
+        while (Q.size() != 0) {               // run time V
+            Node u = Q.poll();                // return the smallest u.weight
+            S.add(u);                         // worst case log V (for (Node v : G.getAdjacency(u)))
+            for (Node v : G.getAdjacency(u)) {// run time (getAdjacency = E) E + V * log V
+                int w = G.getWeight(u.getValue(), v.getValue());
+                relax(u, v, w);
+            }
+        }
+        return S;
+    }                                                                                                                                                                                                                       }
+```
 25 All-Pairs Shortest Paths
 --
+We can solve an all-pairs shortest-paths problem by running a single-source shortest-paths algorithm |V|  times, once for each vertex as the source. 
+- If all edge weights are nonnegative, we can use Dijkstra’s algorithm. 
+- If we use the linear-array implementation of the min-priority queue, the running time is O(V^3 + VE) = O(V^3) 
+- The binary min-heap implementation of the min-priority queue yields a running time of O(VE lg V ), which is an improvement if the graph is sparse. 
+- Alternatively, we can implement the min-priority queue with a Fibonacci heap, yielding a running time of O(V^2 lg V + VE).
+- If graph has negative-weight edges, we can use Bellman-Ford:
+    - running time is O(V^2 E)
+
 
 25.2 The Floyd-Warshall algorithm
 --
@@ -611,5 +789,6 @@ VII Selected Topics
 
 34 NP-Completeness
 --
-
+In computational complexity theory, a decision problem is NP-complete when it is both in NP and NP-hard. The set of NP-complete problems is often denoted by NP-C or NPC. The abbreviation NP refers to "nondeterministic polynomial time".
+![](algorithms/p_np_npc.png)
 
