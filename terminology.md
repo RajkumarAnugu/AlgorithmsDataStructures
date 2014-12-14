@@ -296,9 +296,11 @@ Complexity          | Terminology
 --
 prime numbers, the positive integers that have only 1 and themselves as positive divisors
 
-> If a and b are integers with a != 0, we say that **a divides b** if there is an integer c such that b = ac, or equivalently, if b/a is an integer.
-> - When a divides b we say that a is a factoror divisor of b, and that b is a multiple of a.
-> - The notation a|b denotes that a divides b.
+4.1     Divisibility and Modular Arithmetic
+--
+ If a and b are integers with a != 0, we say that **a divides b** if there is an integer c such that b = ac, or equivalently, if b/a is an integer.
+- When a divides b we say that a is a factoror divisor of b, and that b is a multiple of a.
+- The notation a|b denotes that a divides b.
 
 Theorem 1:
 > Let a, b, and c be integers, where a != 0. Then
@@ -312,18 +314,246 @@ THE DIVISION ALGORITHM :
 > - Then there are unique integers q and r, with 0 ≤ r < d, such that 
 >   - **a = dq + r**.
 
-4.1     Divisibility and Modular Arithmetic
---
+In the equality given in the division algorithm, 
+- d is called the divisor, 
+- a is called the dividend, 
+- q is called the quotient, and 
+- r is called the remainder. 
+
+- This notation is used to express the quotient and remainder:
+    - q = a div d   (= ⌊a/d⌋)
+    - r = a  mod  d.
+        - r = a mod d = a − d⌊a/d⌋
+
+#####Modular Arithmetic
+> If a and b are integers and m is a positive integer, then 
+> - **a is congruent to b modulo m if m divides a − b**.
+> - We use the notation a ≡ b (mod m) to indicate that a is congruent to b modulo m.
+> - We say that a ≡ b (mod m) is a congruence and that m is its modulus (plural moduli). 
+> - If a and b are not congruent modulo m, we write a !≡ b (mod m).
+
+Let a and b be integers, and let m be a positive integer. 
+- Then a ≡ b (mod m) 
+    - if and only if a mod m = b mod m.
+
+Let m be a positive integer. 
+- The integers a and b are congruent modulo m if and only if there is an integer k such that 
+    - a = b + km.
+
+- If a ≡ b (mod m) and c ≡ d (mod m), then 
+    - a + c ≡ b + d (mod m) and ac ≡ bd (mod m).
+
 4.2     Integer Representations and Algorithms
 --
+decimal (base 10),  binary (base 2), octal (base 8), and hexadecimal (base 16)
+
+####Representations of Integers
+**base b expansion of n**:
+
+![express integer](algorithms/expressinteger.png)
+
+```java
+    public BaseBexpansion(int n, int b) {
+        this.n = n;
+        this.b = b;
+        q = n;
+        k = 0;
+        a = new ArrayList<Integer>();
+        while (q != 0) {
+            a.add(k, q % b);
+            q = q / b;
+            k = k + 1;
+        }
+    }
+```
+
+Computing div and mod
+
+```java
+    /**
+     * @param a
+     *         dividend or numerator
+     * @param d
+     *         divisor or denominator
+     *
+     * @return [q, r] q = (a divided by d) is the quotient, r = (a mod d) is the remainder
+     */
+    public static long[] divisionAgorithm(long a, long d) {
+        long q = 0;
+        long r = Math.abs(a);
+        while (r >= d) {
+            r -= d;
+            q += 1;
+        }
+        if (a < 0 && r > 0) {
+            r = d - r;
+            q = -(q + 1);
+        }
+        return new long[]{q, r};
+    }
+```
+
+
+
 4.3     Primes and Greatest Common Divisors
 --
+**A prime** is an integer greater than 1 that is divisible by no positive integers other than 1 and itself. 
+- Every integer greater than 1 is divisible by at least two integers, because a positive integer is divisible by 1 and by itself.
+-  Positive integers that have exactly two different positive integer factors are called primes.
+    - An integer p greater than 1 is called prime if the only positive factors of p are 1 and p. 
+    - A positive integer that is greater than 1 and is not prime is called composite.
+
+> THE FUNDAMENTAL THEOREM OF ARITHMETIC 
+> - Every integer greater than 1 can be written uniquely as a prime or as the product of two or more primes where the prime factors are written in order of nondecreasing size.
+>
+> - If n is a composite integer, then n has a prime divisor less than or equal to √n
+> 
+> - There are infinitely many primes.
+>
+> - the largest prime known has been an integer of the special form 2^p − 1, where p is also prime
+
+#####Greatest Common Divisors and Least Common Multiples
+Let a and b be integers, not both zero. 
+- The largest integer d such that d | a and d | b is called the greatest common divisor of a and b. 
+- **The greatest common divisor** of a and b is denoted by **gcd(a, b)**.
+- ![](algorithms/gcd.png)
+> The integers a and b are relatively prime if their greatest common divisor is 1.
+
+The **least common multiple** of the positive integers a and b is the smallest positive integer that is divisible by both a and b. 
+- The least common multiple of a and b is denoted by lcm(a, b).
+- ![](algorithms/lcm.png)
+
+The relationship between the gcd & lcm:
+> Let a and b be positive integers. 
+> - Then **ab = gcd(a, b) · lcm(a, b)**.
+
+Let a = bq + r, where a, b, q, and r are integers. Then gcd(a, b) = gcd(b, r).
+> - **gcd(a, b) = gcd(r0, r1) = gcd(r1, r2) = · · · = gcd(rn−2, rn−1) = gcd(rn−1, rn) = gcd(rn, 0) = rn**.
+> - Hence, the greatest common divisor is the last nonzero remainder in the sequence of divisions.)
+
+```java
+    /**
+     * Euclidean algorithm:  finding the greatest common divisor
+     *
+     * @param a
+     *         positive integer
+     * @param b
+     *         positive integer
+     *
+     * @return gcd(a, b)
+     */
+    public static int gcd(int a, int b) {
+        int x = a, y = b, r;
+        while (y != 0) {
+            r = x % y;
+            x = y;
+            y = r;
+        }
+        return x;
+    }
+```
+BÉZOUT’S THEOREM 
+> If a and b are positive integers, then there exist integers s and t such that 
+> - **gcd(a, b) = sa + tb** 
+>   - called: Bézout’s identity 
+> - s and t are called: Bézout coefficients of a and b
+
+
 4.4     Solving Congruences
 --
+#####Linear Congruences
+> ax ≡ b (mod m)
+- m is a positive integer, a and b are integers, and x is a variable, 
+    - is called a linear congruence.
+
+THE CHINESE REMAINDER THEOREM :
+> Let m1, m2, . . . , mn be pairwise relatively prime positive integers greater than one and a1, a2, . . . , an arbitrary integers. Then the system
+> - x ≡ a1 (mod m1), 
+> - x ≡ a2 (mod m2),
+> -  ...
+> - x ≡ an (mod mn)
+> 
+> has a unique solution modulo m = m1m2 · · · mn. (That is, there is a solution x with 0 ≤ x < m, and all other solutions are congruent modulo m to this solution.)
+
 4.5     Applications of Congruences
 --
+Hashing Functions:
+- h(k) = k mod m
+    - m is the number of available memory locations.
+    - the hashing function should be onto, so that all memory locations are possible.
+        - a hashing function is not one-to-one (because there are more possible keys than memory locations), 
+        - more than one file may be assigned to a memory location. 
+            - When this happens, we say that a collision occurs. 
+            - One way to resolve a collision is to assign the first free location following the occupied memory location assigned by the hashing function.
+
+
 4.6     Cryptography
 --
+- Number theory is the basis of many classical ciphers, first used thousands of years ago.
+
+#####Classical Cryptography
+One of the earliest known uses of cryptography was by Julius Caesar. He made messages secret by shifting each letter three letters forward in the alphabet.
+- encryption:
+    - f (p) = (p + k) mod 26
+- decryption:
+    - f−1 (p) = (p − k) mod 26
+- integer k is called a key
+- 
+- to slightly enhance security:
+    - f (p) = (ap + b) mod 26
+        - where a and b are integers, chosen so that f is a bijection. 
+        - (The function f (p) = (ap + b) mod 26 is a bijection if and only if gcd(a, 26) = 1.) 
+        - Such a mapping is called an affine transformation, 
+        - and the resulting cipher is called an affine cipher.
+#####Block ciphers
+**Shift ciphers** and **affine ciphers** proceed by replacing each letter of the alphabet by another letter in the alphabet. 
+- Because of this, these ciphers are called **character** or **monoalphabetic ciphers**.
+
+**Block ciphers** can make it harder to successfully attack ciphertext: 
+- by replacing blocks of letters with other blocks of letters.
+
+**Cryptosystems** 
+> A cryptosystem is a five-tuple (P, C, K, E, D), 
+> - where P is the set of plaintext strings, 
+> - C is the set of ciphertext strings, 
+> - K is the keyspace (the set of all possible keys), 
+> - E is the set of encryption functions, and 
+> - D is the set of decryption functions. 
+> - We denote by Ek the encryption function in E corresponding to the key k and Dk the decryption function in D that decrypts ciphertext that was encrypted using Ek, that is 
+>   - Dk(Ek(p)) = p, for all plaintext strings p.
+
+#####Public Key Cryptography
+**a private key cryptosystem** two parties who wish to communicate in secret must share a secret key.
+- Because anyone who knows this key can both encrypt and decrypt messages, 
+- two people who want to communicate securely need to securely exchange this key.
+    - US government standard for private key cryptography, 
+        - the Advanced Encryption Standard (AES), 
+            - is extremely complex and is considered to be highly resistant to cryptanalysis
+- for extra security, a new key is used for each communication session between two parties
+
+- To avoid the need for keys to be shared by every pair of parties that wish to communicate securely
+    - **public key cryptosystems** was introduced in 1970s.
+
+**public key cryptosystems**
+- knowing how to send an encrypted message does not help decrypt messages
+- everyone can have a publicly known encryption key. 
+- Only the decryption keys are kept secret
+- only the intended recipient of a message can decrypt it
+    - because: 
+        - as far as it is currently known, knowledge of the encryption key does not let someone recover the plaintext message without an extraordinary amount of work (such as billions of years of computer time).
+
+#####The RSA Cryptosystem
+**public key cryptosystem**: RSA system
+- RSA cryptosystem, each individual has an encryption key (n, e) 
+- where n = pq, the modulus is the product of two large primes p and q, say with 200 digits each
+- an exponent e that is relatively prime to (p − 1)(q − 1)
+- To produce a usable key, two large primes must be found. 
+    - This can be done quickly on a computer using probabilistic primality tests,
+    - However, the product of these primes n = pq, with approximately 400 digits, 
+        - cannot, as far as is currently known, be factored in a reasonable length of time.
+        - this is an important reason why decryption cannot, as far as is currently known, be done quickly without a separate decryption key.
+
+
 5       Induction and Recursion
 --
 5.1     Mathematical Induction
@@ -331,10 +561,15 @@ THE DIVISION ALGORITHM :
 - mathematical induction is used extensively to prove results about a large variety of discrete objects. 
 - mathematical induction can be used only to prove results obtained in some other way. It is not a tool for discovering formulae or theorems.
 
-- mathematical induction has two parts, a basis step, where we show that P (1) is true, and an inductive step, where we show that for all positive integers k, if P (k) is true, then P (k + 1) is true.
+- mathematical induction has two parts, 
+    - a basis step, where we show that P (1) is true, 
+    - and an inductive step, where we show that for all positive integers k, if P (k) is true, then P (k + 1) is true.
 
 5.2     Strong Induction and Well-Ordering
 --
+> STRONG INDUCTION To prove that P (n) is true for all positive integers n, where P (n) is a propositional function, we complete two steps:
+> - BASIS STEP: We verify that the proposition P (1) is true.
+> - INDUCTIVE STEP: We show that the conditional statement [P (1) ∧ P (2) ∧ · · · ∧ P (k)] → P (k + 1) is true for all positive integers k.
 
 5.3     Recursive Definitions and Structural Induction
 --
@@ -353,21 +588,118 @@ An algorithm is called recursive if it solves a problem by reducing it to an ins
 
 5.4     Recursive Algorithms     
 --
+> An algorithm is called recursive if it solves a problem by reducing it to an instance of the same problem with smaller input.
 
+```java
+    /**
+     * Recursive Algorithm for Computing n!
+     *
+     * @param n
+     *         non negative integer
+     *
+     * @return n!
+     */
+    public static int factorial(int n) {
+        if (n == 0)
+            return 1;
+        else
+            return n * factorial(n - 1);
+    }
+```
+Recursive Algorithm for Computing gcd(a, b):
 
+```java
+    private static int gcdr(int a, int b) {
+        if (a == 0)
+            return b;
+        else
+            return gcdr(b % a, a);
+    }
+```
+Recursive Algorithm for Fibonacci Numbers:
+```java
+    public static int fibonacci(int n) {
+        if (n == 0)
+            return 0;
+        else if (n == 1)
+            return 1;
+        else
+            return fibonacci(n - 1) + fibonacci(n - 2);
+    }
+```
 
 6       Counting
 --
 6.1     The Basics of Counting
 --
+THE PRODUCT RULE 
+- Suppose that a procedure can be broken down into a sequence of two tasks. 
+- If there are n1 ways to do the first task and for each of these ways of doing the first task, 
+- there are n2 ways to do the second task, 
+
+THE SUM RULE 
+- If a task can be done either in one of n1 ways or in one of n2 ways, 
+- where none of the set of n1 ways is the same as any of the set of n2 ways, 
+- then there are n1 +n2 ways to do the task.
+
+THE SUBTRACTION RULE 
+- If a task can be done in either n1 ways or n2 ways, 
+- then the number of ways to do the task is n1 + n2 minus the number of ways to do the task that are common to the two different ways.
+    - The subtraction rule is also known as the principle of inclusion–exclusion
+
+THE DIVISION RULE 
+- There are n/d ways to do a task if it can be done using a procedure that can be carried out in n ways, 
+- and for every way w, 
+- exactly d of the n ways correspond to way w.
+- in term of set:
+    - If the finite set A is the union of n pairwise disjoint subsets each with d elements, then n = |A|/d.
+- in term of function:
+    - If f is a function from A to B where A and B are finite sets, 
+    - and that for every value y ∈ B there are exactly d values x ∈ A such that f (x) = y (in which case, we say that f is d-to-one), then 
+    - |B| = |A|/d.
+
 6.2     The Pigeonhole Principle
 --
+THE PIGEONHOLE PRINCIPLE 
+> If k is a positive integer and k + 1 or more objects are placed into k boxes, then there is at least one box containing two or more of the objects.
+> - The pigeonhole principle is also called the Dirichlet drawer principle
+
+THE GENERALIZED PIGEONHOLE PRINCIPLE 
+- If N objects are placed into k boxes, 
+- then there is at least one box containing at least ⌈N/k⌉ objects.
+
+
 6.3     Permutations and Combinations
 --
+A permutation of a set of distinct objects is an ordered arrangement of these objects.
+
+> If n is a positive integer and r is an integer with 1 ≤ r ≤ n, 
+> - then there are P (n, r ) = n(n − 1)(n − 2) · · · (n − r + 1)
+> - r-permutations of a set with n distinct elements.
+> - 
+> - If n and r are integers with 0 ≤ r ≤ n, then 
+>       - P(n,r) = n! / (n−r)!
+
+The number of **r-combinations** of a set with n elements, 
+- where n is a nonnegative integer and r is an integer with 0 ≤ r ≤ n, equals
+- C(n,r) = n! / r! (n - r)!
+
+> Let n and r be nonnegative integers with r ≤ n. Then C(n, r) = C(n, n − r).
+
+
 6.4     Binomial Coefficients and Identities
 --
+![the binomial theorem](algorithms/binomial.png)
+
+
+
 6.5     Generalized Permutations and Combinations
 --
+> The number of r-permutations of a set of n objects with repetition allowed is n^r.
+
+There are C(n + r − 1, r) = C(n + r − 1, n − 1) r-combinations from a set with n elements when repetition of elements is allowed.
+
+
 8       Advanced Counting Techniques
 --
 8.1     Applications of Recurrence relations
