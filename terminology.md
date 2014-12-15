@@ -174,6 +174,8 @@ Functions are sometimes also called mappings or transformations.
 - The function f is a **one-to-one correspondence**, or a **bijection**, if it is both one-to-one and onto. 
 - We also say that such a function is **bijective**.
 
+![Different Types of Correspondences](algorithms/differentcorrespondences.png)
+
 #####the floor function
 Floor function
 - Let x be a real number. The floor function rounds x down to the closest integer less than or equal to x.
@@ -451,12 +453,12 @@ Let a = bq + r, where a, b, q, and r are integers. Then gcd(a, b) = gcd(b, r).
         return x;
     }
 ```
+
 BÉZOUT’S THEOREM 
 > If a and b are positive integers, then there exist integers s and t such that 
 > - **gcd(a, b) = sa + tb** 
 >   - called: Bézout’s identity 
 > - s and t are called: Bézout coefficients of a and b
-
 
 4.4     Solving Congruences
 --
@@ -474,6 +476,11 @@ THE CHINESE REMAINDER THEOREM :
 > 
 > has a unique solution modulo m = m1m2 · · · mn. (That is, there is a solution x with 0 ≤ x < m, and all other solutions are congruent modulo m to this solution.)
 
+To construct a simultaneous solution:
+- Mk = m/mk
+- **Mkyk ≡ 1 (mod mk)**
+- **x = a1M1y1 + a2M2y2 + · · · + anMnyn**
+- (x ≡ akMkyk ≡ ak (mod mk))
 4.5     Applications of Congruences
 --
 Hashing Functions:
@@ -705,7 +712,12 @@ There are C(n + r − 1, r) = C(n + r − 1, n − 1) r-combinations from a set 
 --
 8.2     Solving Linear Recurrence Relations
 --
+![linear homogeneous](algorithms/linearhomogeneous.png)
 
+
+![linear homogeneous recurrence relations of degree two](algorithms/linear homogeneous recurrence relations of degree two.png)
+
+![linear homogeneous recurrence relations of degree two with one root](algorithms/linear homogeneous recurrence relations of degree two one root.png)
 
 9       Relations
 --
@@ -944,7 +956,7 @@ A minimum spanning tree in a connected weighted graph is a spanning tree that ha
 --
 A vocabulary (or alphabet) V is a finite, nonempty set of elements called symbols. 
 - A word (or sentence) over V is a string of finite length of elements of V . 
-- The empty string or null string, denoted by λ, is the string containing no symbols. 
+- The **empty string or null string, denoted by λ**, is the string containing no symbols. 
 - The set of all words over V is denoted by V∗. A language over V is a subset of V∗.
 
 Language can be specified by:
@@ -963,7 +975,19 @@ A grammar provides a set of symbols of various types and a set of rules for prod
             - the set of nonterminals {sentence, noun phrase, verb phrase, adjective, article, noun, verb, adverb}
     - start symbol, denoted by S, which is the element of the vocabulary that we always begin with.
  
-> A phrase-structure grammar G=(V,T,S,P) consists of a vocabulary V, a subset T of V consisting of terminal symbols, a start symbol S from V , and a finite set of productions P . The set V − T is denoted by N . Elements of N are called nonterminal symbols. Every production in P must contain at least one nonterminal on its left side.
+> A phrase-structure grammar **G=(V,T,S,P)** consists of 
+> - a vocabulary V, 
+> - a subset T of V consisting of terminal symbols, 
+> - a start symbol S from V , and 
+> - a finite set of productions P . 
+> - The set V − T is denoted by N. 
+> - Elements of N are called nonterminal symbols. 
+> - Every production in P must contain at least one nonterminal on its left side.
+>   - example: 
+>       - G = (V,T,S,P),where V = {0,1,A,S},T = {0,1}
+>       - the productions in P are S → 1A, S → 0, S → λ, A → 0A, A → 1A, and A → 1.
+>       - Nondeterministic finite state automaton reconizing:
+>           - ![](algorithms/nondeterministicfinitestateautomatonrecognizing.png)
 
 
 13.2    Finite-State Machines with Output
