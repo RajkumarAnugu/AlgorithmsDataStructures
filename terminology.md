@@ -504,7 +504,7 @@ One of the earliest known uses of cryptography was by Julius Caesar. He made mes
 - decryption:
     - f−1 (p) = (p − k) mod 26
 - integer k is called a key
-- 
+ 
 - to slightly enhance security:
     - f (p) = (ap + b) mod 26
         - where a and b are integers, chosen so that f is a bijection. 
