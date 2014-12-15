@@ -393,8 +393,6 @@ Computing div and mod
     }
 ```
 
-
-
 4.3     Primes and Greatest Common Divisors
 --
 **A prime** is an integer greater than 1 that is divisible by no positive integers other than 1 and itself. 
@@ -417,6 +415,7 @@ Let a and b be integers, not both zero.
 - The largest integer d such that d | a and d | b is called the greatest common divisor of a and b. 
 - **The greatest common divisor** of a and b is denoted by **gcd(a, b)**.
 - ![](algorithms/gcd.png)
+
 > The integers a and b are relatively prime if their greatest common divisor is 1.
 
 The **least common multiple** of the positive integers a and b is the smallest positive integer that is divisible by both a and b. 
@@ -674,7 +673,7 @@ THE GENERALIZED PIGEONHOLE PRINCIPLE
 A permutation of a set of distinct objects is an ordered arrangement of these objects.
 
 > If n is a positive integer and r is an integer with 1 ≤ r ≤ n, 
-> - then there are P (n, r ) = n(n − 1)(n − 2) · · · (n − r + 1)
+> - then there are P (n, r ) = n(n − 1)(n − 2) · · · (n − r + 1).
 > - r-permutations of a set with n distinct elements.
 > - 
 > - If n and r are integers with 0 ≤ r ≤ n, then 
@@ -712,57 +711,341 @@ There are C(n + r − 1, r) = C(n + r − 1, n − 1) r-combinations from a set 
 --
 9.1     Relations and Their Properties
 --
+Reflexive:
+- A relation R on a set A is called reflexive if (a,a) ∈ R for every element a ∈ A.
+
+Symmetric:
+- A relation Ronaset A is called symmetric if(b,a) ∈ R whenever(a,b) ∈ R,for all a,b ∈ A. A relation R on a set A such that for all a, b ∈ A, if (a, b) ∈ R and (b, a) ∈ R, then a = b is called antisymmetric.
+    - Using quantifiers, we see that the relation R on the set A is symmetric if ∀a∀b((a, b) ∈ R → (b, a) ∈ R). Similarly, the relation R on the set A is antisymmetric if ∀a∀b(((a, b) ∈ R ∧ (b, a) ∈ R) → (a = b))
+
+Transitive:
+- A relation R on a set A is called transitive if whenever (a,b)∈R and (b,c)∈R, then (a,c) ∈ R, for all a,b,c ∈ A
+
+
 9.2     n-ary Relations and Their Applications
 --
+n-ary relations:
+- LetA1,A2,...,An besets.Ann-aryrelationonthesesetsisasubsetofA1 × A2 × ··· × An. The sets A1, A2, . . . , An are called the domains of the relation, and n is called its degree.
+
+A domain of an n-ary relation is called a **primary key** when the value of the n-tuple from this domain determines the n-tuple. That is, 
+- a domain is a primary key when no two n-tuples in the relation have the same value from this domain.
+
+
 9.3     Representing Relations
 --
+**A directed graph, or digraph**, 
+- consists of a set V of vertices (or nodes) together with 
+- a set E of ordered pairs of elements of V called edges (or arcs). 
+- The vertex a is called the initial vertex of the edge (a, b), and the vertex b is called the terminal vertex of this edge.
+
+a relation is reflexive if and only if there is a loop at every vertex of the directed graph,
+
+A relation is symmetric if and only if for every edge between distinct vertices in its digraph there is an edge in the opposite direction, 
+- so that (y,x) is in the relation whenever (x,y) is in the relation
+
+a relation is antisymmetric if and only if there are never two edges in opposite directions between distinct vertices.
+
+a relation is transitive if and only if whenever there is an edge from a vertex x to a vertex y and an edge from a vertex y to a vertex z, there is an edge from x to z (completing a triangle where each side is a directed edge with the correct direction).
+
+
 9.4     Closures of Relations
 --
+A path from a to b in the directed graph G is a sequence of edges (x0,x1), (x1,x2), (x2,x3),...,(xn−1,xn) in G, 
+- where n is a nonnegative integer, and x0 = a and xn = b, that is, 
+- a sequence of edges where the terminal vertex of an edge is the same as the initial vertex in the next edge in the path. 
+- This path is denoted by x0, x1, x2, . . . , xn−1, xn and has length n. 
+- We view the empty set of edges as a path of length zero from a to a. 
+- A path of length n ≥ 1 that begins and ends at the same vertex is called a circuit or cycle.
+
+- A path in a directed graph can pass through a vertex more than once. 
+- Moreover, an edge in a directed graph can occur more than once in a path.
+
 9.5     equivalence Relations
 --
+A relation on a set A is called an equivalence relation if it is 
+- reflexive, 
+- symmetric, and 
+- transitive.
+
+
+
+
 9.6     Partial Orderings
 --
-
+A relation R on a set S is called a partial ordering or partial order if it is 
+- reflexive, 
+- antisym- metric, and 
+- transitive. 
+- A set S together with a partial ordering R is called a partially ordered set, or poset, and is denoted by (S, R). 
+- Members of S are called elements of the poset.
 
 10      Graphs
 --
+Graphs are discrete structures consisting of vertices and edges that connect these vertices.
+
 10.1    Graphs and Graph Models
 --
+A graph G = (V,E) consists of V, a nonempty set of vertices (or nodes) and 
+- E, a set of edges. Each edge has either one or two vertices associated with it, called its endpoints. 
+- An edge is said to connect its endpoints.
+
+A directed graph (or digraph) (V,E) consists of a nonempty set of vertices V and a set of directed edges (or arcs) E. 
+- Each directed edge is associated with an ordered pair of vertices. 
+- The directed edge associated with the ordered pair (u, v) is said to start at u and end at v.
+
 10.2    Graph Terminology and Special Types of Graphs
 --
+Two vertices u and v in an undirected graph G are called **adjacent (or neighbors)** in G if u and v are endpoints of an edge e of G. 
+- Such an edge e is called incident with the vertices u and v and e is said to connect u and v.
+
+**The degree of a vertex** in an undirected graph is the number of edges incident with it, 
+- except that a loop at a vertex contributes twice to the degree of that vertex. 
+- The degree of the vertex v is denoted by deg(v).
+
+> A vertex of degree zero is called isolated. It follows that an isolated vertex is not adjacent to any vertex.
+
+![Handshaking Theorem](algorithms/handshakingtheorem.png)
+
+> An undirected graph has an even number of vertices of odd degree.
+
+Complete Graphs 
+- A complete graph on n vertices, denoted by Kn, 
+- is a simple graph that contains exactly one edge between each pair of distinct vertices.
+
+A simple graph G is called **bipartite** if its vertex set V can be partitioned into two disjoint sets V1 and V2 such that every edge in the graph connects a vertex in V1 and a vertex in V2 
+- (so that no edge in G connects either two vertices in V1 or two vertices in V2). 
+- When this condition holds, we call the pair (V1, V2) a bipartition of the vertex set V of G.
+
+> A simple graph is bipartite if and only if it is possible to assign one of two different colors to each vertex of the graph so that no two adjacent vertices are assigned the same color.
+
 10.3    Representing Graphs and Graph Isomorphism
 --
+**Isomorphic**:
+- two graphs have exactly the same form, 
+- in the sense that there is a one-to-one correspondence between their vertex sets that preserves edges. 
+- In such a case, we say that the two graphs are isomorphic
+
+> The simple graphs G1 = (V1, E1) and G2 = (V2, E2) are isomorphic 
+> - if there exists a one- to-one and onto function f from V1 to V2 with the property that a and b are adjacent in G1 if and only if f (a) and f (b) are adjacent in G2, for all a and b in V1. 
+> - Such a function f is called an isomorphism.∗ 
+> - Two simple graphs that are not isomorphic are called nonisomorphic.
+
+Determining Isomorphic:
+- isomorphic simple graphs must have the same number of vertices, 
+    - because there is a one-to-one correspondence between the sets of vertices of the graphs.
+- Isomorphic simple graphs also must have the same number of edges, 
+    - because the one-to-one correspondence between vertices establishes a one-to-one correspondence between edges. 
+    - In addition, the degrees of the vertices in isomorphic simple graphs must be the same. 
+
 10.4    Connectivity
 --
+Paths:
+- a path is a sequence of edges that begins at a vertex of a graph and travels from vertex to vertex along edges of the graph.
+- The path is a circuit if it begins and ends at the same vertex
+- **A path or circuit is simple** if it does not contain the same edge more than once.
+- A path of length greater than zero that begins and ends at the same vertex is called a circuit or cycle.
+
+Undirected Graphs:
+- An undirected graph is called connected if there is a path between every pair of distinct vertices of the graph. 
+- An undirected graph that is not connected is called disconnected. 
+- We say that we disconnect a graph when we remove vertices or edges, or both, to produce a disconnected subgraph.
+
+> There is a simple path between every pair of distinct vertices of a connected undirected graph.
+
+
 10.5    Euler and Hamilton Paths
 --
+An Euler circuit in a graph G is a simple circuit containing every edge of G. 
+- An Euler path in G is a simple path containing every edge of G.
+
+> A connected multigraph with at least two vertices has an Euler circuit if and only if each of its vertices has even degree.
+
+A connected multigraph has an Euler path but not an Euler circuit if and only if it has exactly two vertices of odd degree.
+
 10.6    Shortest-Path Problems
 --
+Graphs that have a number assigned to each edge are called weighted graphs.
+
+Dijkstra’s algorithm proceeds by finding the length of a shortest path from a to a first vertex, 
+- the length of a shortest path from a to a second vertex, 
+- and so on, until the length of a shortest path from a to z is found. 
+- As a side benefit, this algorithm is easily extended to find the length of the shortest path from a to all other vertices of the graph, and not just to z.
+
 
 11      Trees
 --
+A connected graph that contains no simple circuits is called a tree.
+
 11.1    Introduction to Trees
 --
+A tree is a connected undirected graph with no simple circuits.
+
+> An undirected graph is a tree if and only if there is a unique simple path between any two of its vertices.
+
+A rooted tree is a tree in which one vertex has been designated as the root and every edge is directed away from the root.
+
+m-ary tree:
+- A rooted tree is called an m-ary tree 
+    - if every internal vertex has no more than m children. 
+- The tree is called a full m-ary tree if every internal vertex has exactly m children. 
+- An m-ary tree with m = 2 is called a binary tree.
+
+#####Properties of trees:
+> - A tree with n vertices has n − 1 edges.
+
+> - A full m-ary tree with i internal vertices contains n = mi + 1 vertices.
+ 
+> - A full m-ary tree with
+>   - (i ) n vertices has i = (n − 1)/m internal vertices and l = [(m − 1)n + 1]/m leaves, 
+>   - (ii) i internal vertices has n = mi + 1 vertices and l = (m − 1)i + 1 leaves,
+>   - (iii) l leaves has n = (ml − 1)/(m − 1) vertices and i = (l − 1)/(m − 1) internal ver- tices.
+
+
+
 11.2    Applications of Trees
 --
+Decision Trees:
+- A rooted tree in which each internal vertex corresponds to a decision, with a subtree at these vertices for each possible outcome of the decision, is called a decision tree.
+
+A sorting algorithm based on binary comparisons requires at least ⌈log n!⌉ comparisons.
+
+The number of comparisons used by a sorting algorithm to sort n elements based on binary comparisons is Ω(n log n).
+
+The average number of comparisons used by a sorting algorithm to sort n elements based on binary comparisons is Ω(n log n)
+
 11.3    Tree Traversal
 --
+Preorder traversal:
+- visit: root -> left subtree -> right subtree.
+
+Inorder traversal: 
+- visit: left subtree -> root -> right subtree
+
+Postorder traversal:
+- visit: left -> right -> root
+
+Polish notation:
+- prefix form of an expression when we traverse its rooted tree in preorder
+
 11.4    Spanning Trees
 --
+Let G be a simple graph. A spanning tree of G is a subgraph of G that is a tree containing every vertex of G.
+- A simple graph is connected if and only if it has a spanning tree.
+
+Depth-first search is also called backtracking, because the algorithm returns to vertices previously visited to add paths.
+
 11.5    Minimum Spanning Trees
 --
-
+A minimum spanning tree in a connected weighted graph is a spanning tree that has the smallest possible sum of weights of its edges.
 
 13      Modeling Computation
 --
 13.1    Languages and Grammars
 --
+A vocabulary (or alphabet) V is a finite, nonempty set of elements called symbols. 
+- A word (or sentence) over V is a string of finite length of elements of V . 
+- The empty string or null string, denoted by λ, is the string containing no symbols. 
+- The set of all words over V is denoted by V∗. A language over V is a subset of V∗.
+
+Language can be specified by:
+- list all the words in the language 
+- give some criteria that a word must satisfy to be in the language
+- through the use of a **grammar**
+
+A grammar provides a set of symbols of various types and a set of rules for producing words.
+- a grammar has a vocabulary V , which is a set of symbols used to derive members of the language.
+- vocabulary V:
+    - terminals (denote by T):
+        - the elements of the vocabulary cannot be replaced by other symbols
+            - example: set of terminals {a, the, rabbit, mathematician, hops, eats, quickly, wildly}
+    - nonterminals (denote by N):
+        - the members of the vocabulary, which can be replaced by other symbols
+            - the set of nonterminals {sentence, noun phrase, verb phrase, adjective, article, noun, verb, adverb}
+    - start symbol, denoted by S, which is the element of the vocabulary that we always begin with.
+ 
+> A phrase-structure grammar G=(V,T,S,P) consists of a vocabulary V, a subset T of V consisting of terminal symbols, a start symbol S from V , and a finite set of productions P . The set V − T is denoted by N . Elements of N are called nonterminal symbols. Every production in P must contain at least one nonterminal on its left side.
+
+
 13.2    Finite-State Machines with Output
 --
+finite-state machines are the basis for programs for 
+- spell checking, 
+- grammar checking, 
+- indexing or searching large bodies of text, 
+- recognizing speech, 
+- transforming text using markup languages such as XML and HTML, and 
+- network protocols that specify how computers communicate.
+
+> A finite-state machine M = (S, I, O, f, g, s0) consists of a finite set S of states, a finite input alphabet I, a finite output alphabet O, a transition function f that assigns to each state and input pair a new state, an output function g that assigns to each state and input pair an output, and an initial state s0.
+
 13.3    Finite-State Machines with No Output
 --
+One of the most important applications of finite-state machines is in language recognition.
+This application plays a fundamental role in the design and construction of compilers for programming languages
+
+Kleene closure:
+- Suppose that A is a subset of V*. 
+- the Kleene closure of A, denoted by A*,
+- is the set consisting of concatenations of arbitrarily many strings from A.
+
+#####Finite-State Automata
+a finite-state machine with no output. Such machines are also called finite-state automata
+
+> A finite-state automaton M = (S, I, f, s0, F ) consists of a finite set S of states, a finite input alphabet I, a transition function f that assigns a next state to every pair of state and input (so that f : S × I → S), an initial or start state s0, and a subset F of S consisting of final (or accepting states).
+
+#####Language recognition by finite-state machines
+A string x is said to be recognized or accepted by the machine M = (S, I, f, s0, F ) 
+- if it takes the initial state s0 to a final state, that is, 
+- f(s0,x) is a state in F. 
+- The language recognized or accepted by the machine M, denoted by L(M), 
+    - is the set of all strings that are recognized by M. 
+- Two finite-state automata are called equivalent if they recognize the same language.
+
+**Nondeterministic Finite-State Automata**
+deterministic
+- for each pair of state and input value there is a unique next state given by the transition function
+
+Nondeterministic:
+- there may be several possible next states for each pair of input value and state.
+
+> A nondeterministic finite-state automaton M = (S, I, f, s0, F ) consists of a set S of states, an input alphabet I, a transition function f that assigns a set of states to each pair of state and input (so that f : S × I → P(S)), a starting state s0, and a subset F of S consisting of the final states.
+
+If the language L is recognized by a nondeterministic finite-state automaton M0, then L is also recognized by a deterministic finite-state automaton M1.
+
+
 13.4    Language Recognition
 --
+regular expressions:
+> The regular expressions over a set I are defined recursively by:
+> - the symbol ∅ is a regular expression;
+> - the symbol λ is a regular expression;
+> - the symbol x is a regular expression whenever x ∈ I ;
+> - the symbols (AB), (A ∪ B), and A∗ are regular expressions whenever A
+and B are regular expressions.
+
+Each regular expression represents a set specified by these rules:
+- ∅ represents the empty set, that is, the set with no strings;
+- λ represents the set {λ}, which is the set containing the empty string;
+- x represents the set {x} containing the string with one symbol x;
+- (AB) represents the concatenation of the sets represented by A and by B; 
+- (A ∪ B) represents the union of the sets represented by A and by B;
+- A∗ represents the Kleene closure of the set represented by A.
+
+Sets represented by regular expressions are called **regular sets**
+
+> **KLEENE’S THEOREM** A set is regular if and only if it is recognized by a finite-state automaton.
+
 13.5    Turing Machines
 --
+Turing machines are more powerful than finite-state machines because they include memory capabilities that finite- state machines lack.
 
+Turing machines are the most general models of computation
+
+Turing machines are much more powerful than real computers
+- which have finite memory capabilities
+
+> A Turingmachine T = (S,I,f,s0) consists of
+> - a finite set S of states, 
+> - an alphabet I containing the blank symbol B, 
+> - a partial function f from S × I to S × I × {R, L}, and 
+> - a starting state s0.
