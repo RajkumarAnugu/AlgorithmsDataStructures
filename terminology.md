@@ -682,7 +682,7 @@ A permutation of a set of distinct objects is an ordered arrangement of these ob
 > If n is a positive integer and r is an integer with 1 ≤ r ≤ n, 
 > - then there are P (n, r ) = n(n − 1)(n − 2) · · · (n − r + 1).
 > - r-permutations of a set with n distinct elements.
-> - 
+>  
 > - If n and r are integers with 0 ≤ r ≤ n, then 
 >       - P(n,r) = n! / (n−r)!
 
@@ -873,6 +873,14 @@ An Euler circuit in a graph G is a simple circuit containing every edge of G.
 > A connected multigraph with at least two vertices has an Euler circuit if and only if each of its vertices has even degree.
 
 A connected multigraph has an Euler path but not an Euler circuit if and only if it has exactly two vertices of odd degree.
+#####Hamilton Paths and Circuits
+**A simple path in a graph G that passes through every vertex exactly once is called a Hamilton path**, 
+- and a simple circuit in a graph G that passes through every vertex exactly once is called a Hamilton circuit.
+    - That is, the simple path  x0, x1,..., xn−1, xn in the graph G=(V,E) is a Hamilton path if 
+    - V = {x0,x1,...,xn−1,xn} and 
+    - xi ̸= xj for 0 ≤ i < j ≤ n, and 
+    - the simple circuit x0,x1,...,xn−1,xn,x0 (with n > 0) is a Hamilton circuit if x0,x1,...,xn−1,xn is a Hamilton path.
+
 
 10.6    Shortest-Path Problems
 --
